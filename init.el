@@ -3,11 +3,17 @@
 (setq el-get-user-package-directory "~/konfig/package-configs")
 ;; -- end of Required variables
 
-(defvar autosave-dir
- (concat "/tmp/emacs_autosaves/" (user-login-name) "/"))
-(defvar backup-dir (concat "/tmp/emacs_backups/" (user-login-name) "/"))
-(make-directory backup-dir t)
-(setq backup-directory-alist (list (cons "." backup-dir)))
-
-
+;; Load el-get packages
 (load-library "setup-el-get.el")
+
+;; Clone kd-repos if needed
+(if (not (file-exists-p "kd-repos"))
+    (progn 
+      (call-process "hg" nil "messages" nil "clone" "https://bitbucket.org/dnils/kd" "kd-repos/kd")
+      (call-process "hg" nil "messages" nil "clone" "https://bitbucket.org/dnils/kdext" "kd-repos/kdext")
+      )
+  )
+
+(load-library "kd-repos/kdext/kdext-autosave-settings.el")  ;; Avoid ugly tmp-files
+
+
