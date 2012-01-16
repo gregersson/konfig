@@ -48,10 +48,11 @@
 		   ;; when using AZERTY keyboard, consider C-x C-_
 		   (global-set-key (kbd "C-x C-/") 'goto-last-change))
 	  )
+   (:name redo+ :type elpa)
    )
  )
-;; These just set up recipes.
-(load-library "recipes/recipe-company.el")
+
+;;(load-library "recipes/recipe-company.el")
 (load-library "recipes/recipe-anything.el")
 
 ;; now set our own packages
@@ -70,6 +71,7 @@
    anything-extension
    anything-match-plugin
    eproject
+   redo+
 ))
 
 

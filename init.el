@@ -21,3 +21,17 @@
     )
   )
 
+(setq magic-mode-alist
+  (append (list  
+       '("\\(.\\|\n\\)*\n@implementation" . objc-mode)
+       '("\\(.\\|\n\\)*\n@interface" . objc-mode)
+       '("\\(.\\|\n\\)*\n@protocol" . objc-mode))
+      magic-mode-alist))
+
+(load-library "init-cmode.el")
+(global-set-key  [?\M-o] 'ff-find-other-file)
+
+(require 'redo+)
+(global-set-key  [?\M-_] 'redo)
+
+
