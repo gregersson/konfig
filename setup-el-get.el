@@ -29,11 +29,16 @@
 		   (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 		   (global-set-key (kbd "<C-S-right>")  'buf-move-right)))
    (:name yasnippet :type elpa)
+   (:name eproject :type elpa
+	  :after (lambda () 
+		   ;; Set correct eproject keybindings here.
+
+		   ))
    (:name smex				; a better (ido like) M-x
-	  :after (lambda ()
-		   (setq smex-save-file "~/.emacs.d/.smex-items")
-		   (global-set-key (kbd "M-x") 'smex)
-		   (global-set-key (kbd "M-X") 'smex-major-mode-commands)))
+   	  :after (lambda ()
+   		   (setq smex-save-file "~/.emacs.d/.smex-items")
+   		   (global-set-key (kbd "M-x") 'smex)
+   		   (global-set-key (kbd "M-X") 'smex-major-mode-commands)))
    (:name magit				; git meet emacs, and a binding
 	  :after (lambda ()
 		   (global-set-key (kbd "C-x C-z") 'magit-status)))
@@ -45,7 +50,9 @@
 	  )
    )
  )
-
+;; These just set up recipes.
+(load-library "recipes/recipe-company.el")
+(load-library "recipes/recipe-anything.el")
 
 ;; now set our own packages
 (setq
@@ -58,6 +65,11 @@
    color-theme		                ; nice looking emacs
    color-theme-tango	                ; check out color-theme-solarized
    js2-mode
+   anything
+   anything-complete
+   anything-extension
+   anything-match-plugin
+   eproject
 ))
 
 
@@ -87,5 +99,3 @@
 
 ;; install new packages and init already installed packages
 (el-get 'sync my:el-get-packages)
-
-
