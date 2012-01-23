@@ -1,0 +1,2 @@
+#!/bin/bash
+HOME=/Users/$USER/.dropbox-alt /Applications/Dropbox.app/Contents/MacOS/Dropbox

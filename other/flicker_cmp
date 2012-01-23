@@ -1,0 +1,67 @@
+#!/bin/sh
+#
+# flicker_cmp [options] image1 image2 ...
+#
+# Generate and display an animation of the images given with 1/2 second delay
+# so that you can see and compare the very slight differences between the two
+# images.  A label is added to the image so you know which image is which.
+#
+# OPTIONS
+#    -d delay    the delay for each frame in centi-seconds (def = 50)
+#    -l label    Set label handling to this. EG: '%l' or '%s'  (def = '%f')
+#    -r size     resize image to this size (pixels or percentage)
+#    -s size     scale image to this size (pixels or percentage)
+#
+#
+#
+# Advanced example of labeling using a property setting.
+#
+# convert -size 100x100 xc:red xc:blue -set color '%[pixel:u]' miff:- |\
+#     flicker_cmp -l '%[color]' -d 100 -
+#
+###
+#
+# Anthony Thyssen   5 September 2007
+#
+PROGNAME=`type $0 | awk '{print $3}'`  # search for executable on path
+PROGDIR=`dirname $PROGNAME`            # extract directory of program
+PROGNAME=`basename $PROGNAME`          # base name of program
+Usage() {                              # output the script comments as docs
+  echo >&2 "$PROGNAME:" "$@"
+  sed >&2 -n '/^###/q; /^#/!q; s/^#//; s/^ //; 3s/^/Usage: /; 2,$ p' \
+          "$PROGDIR/$PROGNAME"
+  exit 10;
+}
+
+resize=''
+delay=50
+
+while [  $# -gt 0 ]; do
+  case "$1" in
+  --help|--doc*) Usage ;;
+
+  -d|-delay)  shift; delay="$1" ;;          # animation delay
+  -l|-label)  shift; label="$1" ;;          # set displayed label to this string
+  -r|-resize) shift; resize="-resize $1" ;; # resize image to this size
+  -s|-scale)  shift; resize="-scale $1" ;;  # scale image to this size
+
+  -)  break ;;           # STDIN,  end of user options
+  --) shift; break ;;    # end of user options
+  -*) Usage "Unknown option \"$1\"" ;;
+  *)  break ;;           # end of user options
+
+  esac
+  shift   # next option
+done
+
+# set labeling defaults, different for stdin vs filenames
+if [ "X$label" = "X" ]; then
+  case "$*" in
+    -|*:-) label='%s:%l' ;;
+    *)     label='%f' ;;
+  esac
+fi
+
+convert "$@" -set label "$label" $resize miff:- |\
+  montage - -geometry +0+0 -tile 1x1 -background white miff:- |\
+    animate -delay "$delay" -dispose background -loop 0 -

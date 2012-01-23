@@ -1,0 +1,31 @@
+#!/bin/sh
+#if [ "$1" == "st" ]; then
+if [ `echo $1 | grep "^ \?st"` ]; then
+    hg stat
+    hg stat | grep "^?.*\.\(cpp\|h\|mm\)" -q
+    curret=$?
+    if [ $curret == 0 ]; then 
+	echo -e "\033[31mDID YOU FORGET TO ADD A HEADER OR A CPP FILE????\033[0m " 
+    fi;
+elif [ `echo $1 | grep "^ \?li"` ]; then
+    hg list
+    hg stat | grep "^?.*\.\(cpp\|h\|mm\)" -q
+    curret=$?
+    if [ $curret == 0 ]; then 
+	echo -e "\033[31mDID YOU FORGET TO ADD A HEADER OR A CPP FILE????\033[0m " 
+    fi;
+elif [ `echo $1 | grep "^ \?push"` ]; then
+    root=`hg root`/.hg/hgrc
+    parent=`cat $root| grep "^default"`
+    echo $parent | grep "outgoing" > /dev/null
+    curret=$?
+    if [ $curret == 0 ]; then
+	echo -e "\033[31mDON'T FORGET TO UPDATE, TEST BUILD AND PUSH FROM YOUR OUTGOING!\033[0m " 
+    fi;
+    hg "$@"
+else 
+#    echo "Fine and dandy"
+#    echo $*
+#    echo "$@"
+    hg "$@"
+fi;

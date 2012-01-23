@@ -1,0 +1,13 @@
+[ui]
+username = "Mr. Gregersson"
+merge=merge
+[extensions]
+asubrepos=/Users/greget/src/tools/hgscripts/asubrepos.py
+color=
+purge=
+hgk=
+[defaults]
+pull=-u
+diff=--color=always
+[hgk]
+path=/usr/local/bin/hgk

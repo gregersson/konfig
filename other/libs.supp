@@ -1,0 +1,55 @@
+
+# {
+#    NAME
+#    Memcheck:Leak
+#    ...
+#    obj:*libGLES_CM*
+#    ...
+# }
+
+# {
+#    NAME
+#    Memcheck:Leak
+#    ...
+#    obj:*/lib/libc*
+#    ...
+# }
+
+# {
+#    NAME
+#    Memcheck:Leak
+#    ...
+#    obj:*/lib/libgdk*
+#    ...
+# }
+
+# {
+#    NAME
+#    Memcheck:Leak
+#    ...
+#    obj:*/lib/libgtk*
+#    ...
+# }
+# {
+#    NAME
+#    Memcheck:Leak
+#    ...
+#    obj:*libEGL*
+#    ...
+# }
+# {
+#    NAME
+#    Memcheck:Leak
+#    ...
+#    obj:*libpango*
+#    ...
+# }
+
+# {
+#    NAME
+#    Memcheck:Leak
+#    ...
+#    obj:*libfontconfig*
+#    ...
+# }
+
