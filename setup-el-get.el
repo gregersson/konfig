@@ -29,6 +29,7 @@
 		   (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 		   (global-set-key (kbd "<C-S-right>")  'buf-move-right)))
    (:name yasnippet :type elpa)
+   (:name lua-mode :type elpa)
    (:name eproject :type elpa
 	  :after (lambda () 
 		   ;; Set correct eproject keybindings here.
@@ -72,6 +73,7 @@
    anything-match-plugin
    eproject
    redo+
+   lua-mode
 ))
 
 
@@ -87,8 +89,8 @@
 
 (when (el-get-executable-find "svn")
   (loop for p in '(psvn    		; M-x svn-status
-		   yasnippet		; powerful snippet mode
-		   )
+		   yasnippet)		; powerful snippet mode
+	 
 	do (add-to-list 'my:el-get-packages p)))
 
 
@@ -98,6 +100,14 @@
       (append
        my:el-get-packages
        (loop for src in el-get-sources collect (el-get-source-name src))))
+
+;; (defun print-elements-of-list (list)
+;;        "Print each element of LIST on a line of its own."
+;;        (while list
+;;          (print (car list))
+;;          (setq list (cdr list))))
+;;(print-elements-of-list my:el-get-packages)
+
 
 ;; install new packages and init already installed packages
 (el-get 'sync my:el-get-packages)

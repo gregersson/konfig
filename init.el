@@ -27,11 +27,32 @@
        '("\\(.\\|\n\\)*\n@interface" . objc-mode)
        '("\\(.\\|\n\\)*\n@protocol" . objc-mode))
       magic-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 
 (load-library "init-cmode.el")
 (global-set-key  [?\M-o] 'ff-find-other-file)
+(global-set-key  [C-M-up] 'ff-find-other-file)
+(global-set-key  [C-M-down] 'ff-find-other-file)
+
+(ido-mode t)
 
 (require 'redo+)
 (global-set-key  [?\M-_] 'redo)
 
+(global-set-key [f4] (quote next-error))
 
+(delete-selection-mode 1)
+(setq case-fold-search t)   ; make searches case insensitive
+(semantic-mode t)
+(auto-complete-mode t)
+
+
+
+
+
+
+
+;;   ;; (message (number-to-string bracket-diff))
+;;   ;; [UIView alloc]]
+;;   )
+  
