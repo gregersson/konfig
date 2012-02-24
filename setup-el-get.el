@@ -2,6 +2,7 @@
 (setq package-archives '(("ELPA" . "http://tromey.com/elpa/") 
 			 ("gnu" . "http://elpa.gnu.org/packages/")
 			 ("marmalade" . "http://marmalade-repo.org/packages/")
+			 ("SC"   . "http://joseito.republika.pl/sunrise-commander/")
 			 )
       )
 
@@ -30,6 +31,7 @@
 		   (global-set-key (kbd "<C-S-right>")  'buf-move-right)))
    (:name yasnippet :type elpa)
    (:name lua-mode :type elpa)
+   (:name sunrise-commander :type elpa)
    (:name eproject :type elpa
 	  :after (lambda () 
 		   ;; Set correct eproject keybindings here.
@@ -50,6 +52,21 @@
 		   (global-set-key (kbd "C-x C-/") 'goto-last-change))
 	  )
    (:name redo+ :type elpa)
+   (:name json-mode :type git :url "https://github.com/joshwnj/json-mode.git"
+   	  :after (lambda ()
+		   (progn
+		     (load-library "json-mode/json-mode.el")
+		     (defun beautify-json ()
+		       (interactive)
+		       (let ((b (if mark-active (min (point) (mark)) (point-min)))
+			     (e (if mark-active (max (point) (mark)) (point-max))))
+			 (shell-command-on-region b e
+						  "python -mjson.tool" (current-buffer) t)))
+		     (define-key json-mode-map (kbd "C-c C-f") 'beautify-json)
+
+		     )
+		   )
+	  )
    )
  )
 
@@ -74,6 +91,9 @@
    eproject
    redo+
    lua-mode
+   smex
+   sunrise-commander
+   json-mode
 ))
 
 

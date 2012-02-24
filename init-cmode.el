@@ -35,46 +35,53 @@
 (add-to-list 'auto-mode-alist '("\\.mm$" . objc-mode))
 (add-hook 'c-mode-common-hook 'base-cc-style)
 
-(defun bracket-hook2 ()
+;;(load-library "kd-repos/kdext/kdext-expand-member.el")
+(defun kd-bracketize2()
   (interactive)
-  (self-insert-command 1)
-  (save-excursion
 
-(let* ((insert-pos (point))
-       (expression-start-pos (progn 
-			       (undo-boundary)
-			       (search-backward-regexp "\\;")
-			       (forward-char)
-			       (point)
-			       )
-			     )
-       (bracket-diff (- (count-matches "\\[" expression-start-pos insert-pos)
-			(count-matches "\\]" expression-start-pos insert-pos))
-		     )
-       (beginning-braces (count-matches "\\[" expression-start-pos insert-pos))
+  (let ((statement-start-position nil)
+  	(root-position nil)
+  	(search-cond nil)
+	(bracket-diff nil)
+  	)
 
-       )
-  
-  (if (= beginning-braces 0)
-      (progn 
-	;; If no beginning braces, go to the right of '='
-	(search-forward-regexp "=")
-	(while (or
-;;	     (eq (char-before) " ")
-	     (eq (following-char) "=")
-	     (eq (following-char) " ")
-	     )
-	  (forward-char)
-	  )
-	(forward-char)
-	)
-    (progn
-      ;; Go to first beginning brace.
-      (search-forward-regexp "\\[")
+    (save-excursion
+      (c-beginning-of-statement 1)
+      (setq statement-start-position (point))
       )
-    )
-  (insert "[")
-;;  (message (number-to-string bracket-diff))
-  )))
 
-(define-key objc-mode-map "]" 'bracket-hook2)
+    (save-excursion
+      (setq root-position (point))
+      (setq search-cond t)
+      (while search-cond
+      	(progn
+      	  (if (not (eq (search-backward ":" nil t)  nil))
+      	      (if (> (point) statement-start-position)
+      		  (setq root-position (point))
+      		(setq search-cond nil)
+      		)
+      	    (setq search-cond nil)
+      	    )	  
+      	  )
+      	)
+      )
+    (setq bracket-diff (- (count-matches "\\[" statement-start-position root-position)
+			  (count-matches "\\]" statement-start-position root-position))
+		     )
+    (save-excursion
+      (goto-char root-position)
+      (search-backward " ")
+      (backward-sexp)
+      
+      ;; For var.x.y situations
+      (while (eq (preceding-char) ?.)
+	  (backward-sexp)
+	  )
+      (if (<= bracket-diff 0)
+	  (insert-string "[")
+	)
+      )
+    (insert-string "]")
+    )
+  )
+(define-key objc-mode-map "]" 'kd-bracketize2)
