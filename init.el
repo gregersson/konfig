@@ -50,8 +50,3 @@
 (setq tramp-default-method "ssh")
 
 
-
-;;   ;; (message (number-to-string bracket-diff))
-;;   ;; [UIView alloc]]
-;;   )
-  
