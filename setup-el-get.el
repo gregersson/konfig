@@ -31,6 +31,13 @@
 		   (global-set-key (kbd "<C-S-right>")  'buf-move-right)))
    (:name yasnippet :type elpa)
    (:name lua-mode :type elpa)
+   (:name project-root 
+	  :type http-tar 
+	  :options ("xzf") 
+	  :url "http://hg.piranha.org.ua/project-root/archive/tip.tar.gz"
+	  :after (lambda () 
+		   (require 'project-root)
+		   ))
    (:name sunrise-commander :type elpa)
    (:name eproject :type elpa
 	  :after (lambda () 
@@ -88,12 +95,14 @@
    anything-complete
    anything-extension
    anything-match-plugin
-   eproject
+;;   eproject
    redo+
    lua-mode
    smex
    sunrise-commander
    json-mode
+   ace-jump-mode
+   project-root
 ))
 
 

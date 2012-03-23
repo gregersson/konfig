@@ -47,8 +47,7 @@
 (auto-complete-mode t)
 
 
-
-
+(setq tramp-default-method "ssh")
 
 
 
