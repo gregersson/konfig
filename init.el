@@ -2,6 +2,12 @@
 (setq konfig-home "/Users/greget/konfig/")
 (setq load-path (cons konfig-home load-path))
 (setq el-get-user-package-directory "Users/greget/konfig/package-configs")
+
+;;; A quick & ugly PATH solution to Emacs on Mac OSX
+(if (string-equal "darwin" (symbol-name system-type))
+    (setenv "PATH" (concat "/usr/local/bin:/usr/local/sbin:" (getenv "PATH"))))
+
+
 ;; -- end of Required variables
 
 ;; Load el-get packages
