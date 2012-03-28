@@ -7,6 +7,9 @@
 ;; Load el-get packages
 (load-library "setup-el-get.el")
 
+;; Setup project-root paths and rules
+(load-library "setup-project-root.el")
+
 ;; Clone kd-repos if needed
 (if  (file-exists-p (concat konfig-home "kd-repos"))
     (progn 
