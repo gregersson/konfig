@@ -38,6 +38,11 @@
 	  :after (lambda () 
 		   (require 'project-root)
 		   ))
+   (:name kdcomplete :type git :url "https://github.com/BinaryPeak/kdcomplete"
+	  :after (lambda ()
+		   (load-library "kdcomplete.el")
+		   )
+	  )
    (:name sunrise-commander :type elpa)
    (:name eproject :type elpa
 	  :after (lambda () 
@@ -103,6 +108,7 @@
    json-mode
    ace-jump-mode
    project-root
+   kdcomplete
 ))
 
 
