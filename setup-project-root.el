@@ -4,12 +4,14 @@
          :root-contains-files (".git/index")
          :on-hit (lambda (p) 
 		   (setq project-root-find-files-command "git ls-files")
-                   (message (car p))))
+		   ;;(message (car p))
+		   ))
 	("Mercurial Project"
          :root-contains-files (".hg/store")
          :on-hit (lambda (p) 
-		   (setq project-root-find-files-command "/usr/local/bin/hg locate")
-                   (message (car p))))
+		   (setq project-root-find-files-command "hg locate")
+                   ;;(message (car p))
+		   ))
 	)
       )
 
@@ -25,7 +27,7 @@
                     my-project-root
                     " && "
 		    project-root-find-files-command)))
-      (message command)
+      ;;(message command)
       (setq project-files 
             (split-string 
              (shell-command-to-string command) "\n")))
