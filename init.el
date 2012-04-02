@@ -59,3 +59,9 @@
 (setq tramp-default-method "ssh")
 
 
+;; todos:
+;; fix fuzzy matching for ac-complete, other stuff too?
+;; {} insertion / electric pairing
+;; whitespace-mode?
+;; show-paren-mode?
+;; semantic ac-complete?  gtags?

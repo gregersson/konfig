@@ -30,6 +30,24 @@
 		   (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 		   (global-set-key (kbd "<C-S-right>")  'buf-move-right)))
    (:name yasnippet :type elpa)
+   (:name thesaurus :type http
+	  :url "http://www.emacswiki.org/emacs/download/thesaurus.el"
+	  :after (lambda () 
+		   (require 'thesaurus)
+		   (defun get-thesaurus-api-key-from-file ()
+		     "Return thesaurus api key file content."
+		     (with-temp-buffer
+		       (insert-file-contents "~/Dropbox/dotfiles/thesaurusapikey.txt")
+		       (while (search-forward "
+" nil t)
+			 (replace-match "" nil t))
+		       (buffer-string)))
+		   (setq thesaurus-bhl-api-key (get-thesaurus-api-key-from-file))
+		   (setq thesaurus-prompt-mechanism 'dropdown-list)
+		   )
+	  )
+
+
    (:name lua-mode :type elpa)
    (:name project-root 
 	  :type http-tar 
@@ -38,6 +56,24 @@
 	  :after (lambda () 
 		   (require 'project-root)
 		   ))
+   (:name shell-pop :type http
+	  :url "http://www.emacswiki.org/emacs/download/shell-pop.el"
+	  :after (lambda ()
+		   (require 'shell-pop)
+		   ;; (shell-pop-set-internal-mode "eshell")     ; Or "ansi-term" if you prefer
+		   (shell-pop-set-window-height 60)           ; Give shell buffer 60% of window
+		   ;; If you use "ansi-term" and want to use C-t
+		   ;; (defvar ansi-term-after-hook nil)
+		   ;; (add-hook 'ansi-term-after-hook
+		   ;;           '(lambda ()
+		   ;;              (define-key term-raw-map (kbd "C-t") 'shell-pop)))
+		   ;; (defadvice ansi-term (after ansi-term-after-advice (org))
+		   ;;  (run-hooks 'ansi-term-after-hook))
+		   ;; (ad-activate 'ansi-term)
+		   (global-set-key (kbd "M-§") 'shell-pop)
+		   )
+	  )
+
    (:name kdcomplete :type git :url "https://github.com/BinaryPeak/kdcomplete"
 	  :after (lambda ()
 		   (load-library "kdcomplete.el")
@@ -109,6 +145,7 @@
    ace-jump-mode
    project-root
    kdcomplete
+   thesaurus
 ))
 
 
@@ -145,4 +182,6 @@
 
 
 ;; install new packages and init already installed packages
-(el-get 'sync my:el-get-packages)
+(el-get 'sync my:el-get-packages) 
+
+
