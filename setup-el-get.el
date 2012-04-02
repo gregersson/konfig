@@ -80,11 +80,6 @@
 		   )
 	  )
    (:name sunrise-commander :type elpa)
-   (:name eproject :type elpa
-	  :after (lambda () 
-		   ;; Set correct eproject keybindings here.
-
-		   ))
    (:name smex				; a better (ido like) M-x
    	  :after (lambda ()
    		   (setq smex-save-file "~/.emacs.d/.smex-items")
