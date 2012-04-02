@@ -34,7 +34,11 @@
   (append (list  
        '("\\(.\\|\n\\)*\n@implementation" . objc-mode)
        '("\\(.\\|\n\\)*\n@interface" . objc-mode)
-       '("\\(.\\|\n\\)*\n@protocol" . objc-mode))
+       '("\\(.\\|\n\\)*\n@protocol" . objc-mode)
+       '("\\(.\\|\n\\)*\nsignals:" . c++-mode)
+       '("\\(.\\|\n\\)*\nslots:" . c++-mode)
+       '("\\(.\\|\n\\)*\n#include <QObject>" . c++-mode)
+       )
       magic-mode-alist))
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 
@@ -65,3 +69,7 @@
 ;; whitespace-mode?
 ;; show-paren-mode?
 ;; semantic ac-complete?  gtags?
+;; comment region + comment char
+;; kdc-restart
+;; if !yasnippet, mark placeholder text 
+;; qrr alias etc.

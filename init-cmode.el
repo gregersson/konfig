@@ -85,3 +85,8 @@
     )
   )
 (define-key objc-mode-map "]" 'kd-bracketize2)
+
+(c-add-style "qt-gnu" '("gnu" 
+                        (c-access-key .
+"\\<\\(signals\\|public\\|protected\\|private\\|public slots\\|protected slots\\|private slots\\):")
+                         (c-basic-offset . 4)))

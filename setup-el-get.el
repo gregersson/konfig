@@ -29,7 +29,13 @@
 		   (global-set-key (kbd "<C-S-down>")   'buf-move-down)
 		   (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 		   (global-set-key (kbd "<C-S-right>")  'buf-move-right)))
-   (:name yasnippet :type elpa)
+   (:name yasnippet :type elpa
+	  :after (lambda ()
+		   (yas/initialize)
+		   (yas/load-directory "~/konfig/snippets")
+		   )
+	  )
+   (:name fuzzy :type elpa)
    (:name thesaurus :type http
 	  :url "http://www.emacswiki.org/emacs/download/thesaurus.el"
 	  :after (lambda () 
@@ -75,6 +81,7 @@
 	  )
 
    (:name kdcomplete :type git :url "https://github.com/BinaryPeak/kdcomplete"
+	  :depends (auto-complete yasnippet)
 	  :after (lambda ()
 		   (load-library "kdcomplete.el")
 		   )
@@ -131,7 +138,6 @@
    anything-complete
    anything-extension
    anything-match-plugin
-;;   eproject
    redo+
    lua-mode
    smex
@@ -141,6 +147,7 @@
    project-root
    kdcomplete
    thesaurus
+   fuzzy
 ))
 
 
