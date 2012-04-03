@@ -31,6 +31,17 @@
 		   (global-set-key (kbd "<C-S-down>")   'buf-move-down)
 		   (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 		   (global-set-key (kbd "<C-S-right>")  'buf-move-right)))
+   ;; (:name minimap :type git
+   ;; 	  :url "https://github.com/dustinlacewell/emacs-minimap.git"
+   ;; 	  :after (lambda ()
+   ;; 		   (require 'minimap)
+   ;; 		   (setq minimap-font-face '((default :family "DejaVu Sans Mono" :height 50)))
+   ;; 		   (setq minimap-update-delay 0)
+   ;; 		   (setq minimap-always-recenter t)
+   ;; 		   (setq minimap-recenter-type 'relative)
+   ;; 		   (setq minimap-width-fraction 0.2)
+   ;; 		   )
+   ;; 	  )
    (:name yasnippet :type git
 	  :url "https://github.com/capitaomorte/yasnippet.git"
 	  :after (lambda ()
