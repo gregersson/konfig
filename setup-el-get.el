@@ -31,6 +31,14 @@
 		   (global-set-key (kbd "<C-S-down>")   'buf-move-down)
 		   (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 		   (global-set-key (kbd "<C-S-right>")  'buf-move-right)))
+   (:name highlight-indentation :type git
+	  :url "https://github.com/antonj/Highlight-Indentation-for-Emacs.git"
+	  :after (lambda ()
+		   (require 'highlight-indentation)
+		   (set-face-background 'highlight-indentation-face "#f3f3e8")
+		   (set-face-background 'highlight-indentation-current-column-face "#c3b3b3")
+		   )
+	  )
    ;; (:name minimap :type git
    ;; 	  :url "https://github.com/dustinlacewell/emacs-minimap.git"
    ;; 	  :after (lambda ()
