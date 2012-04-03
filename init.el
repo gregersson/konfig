@@ -66,7 +66,56 @@
 (global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region) ; Comment or uncomment region
 
 
+(tool-bar-mode -1)			    ;; Remove toolbar icons
+(fset 'yes-or-no-p 'y-or-n-p)		    ;; Use y-n instead of yes-no
+(setq inhibit-startup-message t)	    ;; Suppress GNU startup message
+(column-number-mode 1)			    ;; Show column
+(show-paren-mode 1)			;; Show parenthesis near cursor
+(setq visible-bell t)			;; Disable beeping
+(setq require-final-newline t)		;; Require files to end in 
+(setq scroll-step 2)  ;; Scroll closer to the caret
+(setq scroll-preserve-screen-position t) ;; Center cursors on pgdown/up
+(setq-default fill-column 80) ;; Default width 80 
+(setq list-command-history-max 1000) ;; Remember lots of command history!
 
+;; Show the name of the file being edited in the title bar
+(setq frame-title-format '("%b" (buffer-file-name ": %f")) )
+
+(setq-default use-dialog-box nil) ;; Ask questions in the minibuffer instead of dialogs
+(global-hl-line-mode 1) ;; Highlight the current line please
+
+(defalias 'qrr 'query-replace-regexp) ;; Alias for query replace
+(defalias 'r 'rgrep) ;; Alias for recursive grep
+
+;; Tramp default to type ssh
+(setq tramp-default-method "ssh") 
+
+;; Show kill ring in other buffer
+(require 'browse-kill-ring) 
+;; M-y shows kill ring in other buffer.
+(browse-kill-ring-default-keybindings) 
+;; Restore windows after selecting something from kill-ring browser
+(setq browse-kill-ring-quit-action 'save-and-restore) 
+
+;; A library that saves the last position in files
+(require 'saveplace)
+;; Activate it!
+(setq-default save-place t) 
+
+;; Infinite messages buffer length!
+(setq messages-buffer-max-lines t)
+
+;; Grep tool goodness
+(require 'grep)
+;; Include .m and .mm files in the filetype alias 'cchh'
+(add-to-list 
+ 'grep-files-aliases
+ '("cchh" .  "*.cc *.[ch]xx *.[ch]pp *.[CHh] *.CC *.HH *.[ch]++ *.m *.mm")
+ )
+
+
+
+;;--------------
 ;; todos:
 ;; fix fuzzy matching for ac-complete, other stuff too?
 ;; {} electric pairing
