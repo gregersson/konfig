@@ -29,7 +29,8 @@
 		   (global-set-key (kbd "<C-S-down>")   'buf-move-down)
 		   (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 		   (global-set-key (kbd "<C-S-right>")  'buf-move-right)))
-   (:name yasnippet :type elpa
+   (:name yasnippet :type git
+	  :url "https://github.com/capitaomorte/yasnippet.git"
 	  :after (lambda ()
 		   (require 'yasnippet)
 		   (yas/initialize)
