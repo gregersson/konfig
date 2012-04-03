@@ -85,6 +85,7 @@
     )
   )
 (define-key objc-mode-map "]" 'kd-bracketize2)
+(define-key c-mode-base-map (kbd "C-\366") 'kdext-add-braces-with-semicolon) ;; C-ö
 
 (c-add-style "qt-gnu" '("gnu" 
                         (c-access-key .
