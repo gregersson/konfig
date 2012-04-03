@@ -73,3 +73,6 @@
 ;; kdc-restart
 ;; if !yasnippet, mark placeholder text 
 ;; qrr alias etc.
+;; q_property yasnippet eller liknande.
+;; Y/N
+

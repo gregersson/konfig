@@ -31,8 +31,16 @@
 		   (global-set-key (kbd "<C-S-right>")  'buf-move-right)))
    (:name yasnippet :type elpa
 	  :after (lambda ()
+		   (require 'yasnippet)
 		   (yas/initialize)
-		   (yas/load-directory "~/konfig/snippets")
+
+		   ;; Develop in ~/konfig/snippets, but also
+		   ;; use standard snippet directory
+		   (setq yas/root-directory '("~/konfig/snippets"
+					      "~/.emacs.d/el-get/yasnippet/snippets"))
+
+		   ;; Map `yas/load-directory' to every element
+		   (mapc 'yas/load-directory yas/root-directory)
 		   )
 	  )
    (:name fuzzy :type elpa)
