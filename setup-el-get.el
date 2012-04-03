@@ -1,12 +1,13 @@
 ;; Set up ELPA to have more repositories!
-(setq package-archives '(("ELPA" . "http://tromey.com/elpa/") 
+(setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
 			 ("gnu" . "http://elpa.gnu.org/packages/")
 			 ("marmalade" . "http://marmalade-repo.org/packages/")
 			 ("SC"   . "http://joseito.republika.pl/sunrise-commander/")
 			 )
       )
 
-(require 'cl)				; common lisp goodies, loop
+; common lisp goodies, loop
+(require 'cl)
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
@@ -23,8 +24,9 @@
 ;; set local recipes
 (setq
  el-get-sources
- '((:name buffer-move			; have to add your own keys
+ '((:name buffer-move
 	  :after (lambda ()
+		   ; Setup key bindings
 		   (global-set-key (kbd "<C-S-up>")     'buf-move-up)
 		   (global-set-key (kbd "<C-S-down>")   'buf-move-down)
 		   (global-set-key (kbd "<C-S-left>")   'buf-move-left)
@@ -47,7 +49,7 @@
    (:name fuzzy :type elpa)
    (:name thesaurus :type http
 	  :url "http://www.emacswiki.org/emacs/download/thesaurus.el"
-	  :after (lambda () 
+	  :after (lambda ()
 		   (require 'thesaurus)
 		   (defun get-thesaurus-api-key-from-file ()
 		     "Return thesaurus api key file content."
@@ -64,19 +66,23 @@
 
 
    (:name lua-mode :type elpa)
-   (:name project-root 
-	  :type http-tar 
-	  :options ("xzf") 
+   (:name project-root
+	  :type http-tar
+	  :options ("xzf")
 	  :url "http://hg.piranha.org.ua/project-root/archive/tip.tar.gz"
-	  :after (lambda () 
+	  :after (lambda ()
 		   (require 'project-root)
 		   ))
    (:name shell-pop :type http
 	  :url "http://www.emacswiki.org/emacs/download/shell-pop.el"
 	  :after (lambda ()
 		   (require 'shell-pop)
-		   ;; (shell-pop-set-internal-mode "eshell")     ; Or "ansi-term" if you prefer
-		   (shell-pop-set-window-height 60)           ; Give shell buffer 60% of window
+		   ;; Or "ansi-term" if you prefer
+		   ;; (shell-pop-set-internal-mode "eshell")
+
+		   ;; Give shell buffer 60% of window
+		   (shell-pop-set-window-height 60)
+
 		   ;; If you use "ansi-term" and want to use C-t
 		   ;; (defvar ansi-term-after-hook nil)
 		   ;; (add-hook 'ansi-term-after-hook
@@ -106,18 +112,19 @@
 		   )
 	  )
    (:name sunrise-commander :type elpa)
-   (:name smex				; a better (ido like) M-x
+   (:name smex
    	  :after (lambda ()
    		   (setq smex-save-file "~/.emacs.d/.smex-items")
    		   (global-set-key (kbd "M-x") 'smex)
    		   (global-set-key (kbd "M-X") 'smex-major-mode-commands)))
-   (:name magit				; git meet emacs, and a binding
+   (:name magit
 	  :after (lambda ()
 		   (global-set-key (kbd "C-x C-z") 'magit-status)))
 
    (:name goto-last-change		; move pointer back to last change
 	  :after (lambda ()
 		   ;; when using AZERTY keyboard, consider C-x C-_
+		   ;; TODO: better keybinding!
 		   (global-set-key (kbd "C-x C-/") 'goto-last-change))
 	  )
    (:name redo+ :type elpa)
@@ -145,13 +152,13 @@
 ;; now set our own packages
 (setq
  my:el-get-packages
- '(el-get				; el-get is self-hosting
-   escreen            			; screen for emacs, C-\ C-h
-   php-mode-improved			; if you're into php...
-   auto-complete			; complete as you type with overlays
-   zencoding-mode			; http://www.emacswiki.org/emacs/ZenCoding
-   color-theme		                ; nice looking emacs
-   color-theme-tango	                ; check out color-theme-solarized
+ '(el-get
+   escreen
+   php-mode-improved
+   auto-complete
+   zencoding-mode
+   color-theme
+   color-theme-tango
    js2-mode
    anything
    anything-complete
@@ -178,15 +185,14 @@
 ;; Note: el-get-install requires git, so we know we have at least that.
 ;;
 (when (el-get-executable-find "cvs")
-  (add-to-list 'my:el-get-packages 'emacs-goodies-el)) ; the debian addons for emacs
+  ;; the debian addons for emacs
+  (add-to-list 'my:el-get-packages 'emacs-goodies-el))
 
 (when (el-get-executable-find "svn")
   (loop for p in '(psvn    		; M-x svn-status
 		   yasnippet)		; powerful snippet mode
-	 
+
 	do (add-to-list 'my:el-get-packages p)))
-
-
 
 ;; Append the package lists
 (setq my:el-get-packages
@@ -203,6 +209,4 @@
 
 
 ;; install new packages and init already installed packages
-(el-get 'sync my:el-get-packages) 
-
-
+(el-get 'sync my:el-get-packages)
