@@ -64,7 +64,9 @@
 (global-set-key  [?\M-_] 'redo)
 
 ;; Go to next error if available
-(global-set-key [f4] (quote next-error))
+(global-set-key (kbd "<f4>") 'next-error)
+;; Go to previous error if available
+(global-set-key (kbd "S-<f4>") 'previous-error)
 
 ;; Overwrite selection!
 (delete-selection-mode 1)
@@ -140,6 +142,9 @@
 ;; Infinite messages buffer length!
 (setq messages-buffer-max-lines t)
 
+;; Everybody loves goto-line
+(global-set-key "\M-g" 'goto-line)
+
 ;; Grep tool goodness
 (require 'grep)
 ;; Include .m and .mm files in the filetype alias 'cchh'
@@ -167,3 +172,4 @@
 ;; path to file in bottom of buffer
 ;; linenumbers, percent, gutter summary?
 ;; m-g goto line
+;; dispatch_once snippet
