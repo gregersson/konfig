@@ -91,7 +91,7 @@
 	  :url "http://hg.piranha.org.ua/project-root/archive/tip.tar.gz"
 	  :after (lambda ()
 		   (require 'project-root)
-		   (global-set-key (kbd "<f5>") (lambda ()
+		   (global-set-key (kbd "<f7>") (lambda ()
 						  (interactive)
 						  (with-project-root (compile compile-command))))
 		   ))

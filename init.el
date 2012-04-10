@@ -166,10 +166,8 @@
 ;; if !yasnippet, mark placeholder text
 ;; qrr alias etc.
 ;; q_property yasnippet eller liknande.
-;; Y/N
 ;; tramp-mode
 ;; minibuffer completions
 ;; path to file in bottom of buffer
 ;; linenumbers, percent, gutter summary?
-;; m-g goto line
-;; dispatch_once snippet
+;; qml-mode

@@ -1,0 +1,7 @@
+# name: dispatch_once - GCD
+# key: donce
+# --
+static dispatch_once_t onceToken;
+dispatch_once(&onceToken, ^{
+    $0
+});
