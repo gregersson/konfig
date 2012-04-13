@@ -68,7 +68,7 @@
 ;; Go to previous error if available
 (global-set-key (kbd "S-<f4>") 'previous-error)
 
-;; Overwrite selection!
+;; Overwrite selection when pasting / yanking!
 (delete-selection-mode 1)
 
 ;; make searches case insensitive
@@ -153,7 +153,8 @@
  '("cchh" .  "*.cc *.[ch]xx *.[ch]pp *.[CHh] *.CC *.HH *.[ch]++ *.m *.mm")
  )
 
-
+;; Make ediff split windows horizontally as default.
+(setq ediff-split-window-function 'split-window-horizontally)
 
 ;;--------------
 ;; todos:
@@ -162,7 +163,6 @@
 ;; whitespace-mode?
 ;; show-paren-mode?
 ;; semantic ac-complete?  gtags?
-;; kdc-restart
 ;; if !yasnippet, mark placeholder text
 ;; qrr alias etc.
 ;; q_property yasnippet eller liknande.
@@ -171,3 +171,5 @@
 ;; path to file in bottom of buffer
 ;; linenumbers, percent, gutter summary?
 ;; qml-mode
+;; popup-shell in folder of file.
+
