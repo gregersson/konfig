@@ -31,6 +31,32 @@
 		   (global-set-key (kbd "<C-S-down>")   'buf-move-down)
 		   (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 		   (global-set-key (kbd "<C-S-right>")  'buf-move-right)))
+   ;; (:name emacs-w3m
+   ;; 	  :description "A simple Emacs interface to w3m"
+   ;; 	  :type cvs
+   ;; 	  :module "emacs-w3m"
+   ;; 	  :url ":pserver:anonymous@cvs.namazu.org:/storage/cvsroot"
+   ;; 	  :build `("autoconf" ("./configure" ,(concat "--with-emacs=" el-get-emacs)) "make")
+   ;; 	  :build/windows-nt ("sh /usr/bin/autoconf" "sh ./configure" "make")
+   ;; 	  :info "doc")
+   (:name ace-jump-mode
+	  :website "http://www.emacswiki.org/emacs/AceJump"
+	  :description "a quick cursor location minor mode for emacs"
+	  :type git
+	  :url "https://github.com/winterTTr/ace-jump-mode"
+	  :after (lambda ()
+		   ;; C-' 
+		   (global-set-key [67108903] 'ace-jump-mode)
+		   )
+	  )
+   (:name qml-mode
+	  :type git
+	  :url "https://github.com/cataska/qml-mode.git"
+	  :after (lambda ()
+		   (require 'qml-mode)
+		   (add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
+		   )
+	  )
    (:name highlight-indentation :type git
 	  :url "https://github.com/antonj/Highlight-Indentation-for-Emacs.git"
 	  :after (lambda ()
@@ -149,7 +175,12 @@
 		   ;; TODO: better keybinding!
 		   (global-set-key (kbd "C-x C-/") 'goto-last-change))
 	  )
+   (:name js2-mode :type git :url "https://github.com/mooz/js2-mode.git" :module "js2-mode")
    (:name redo+ :type elpa)
+   ;; (:name hl-line+ :type elpa :module "hl-line+")
+   ;; (:name vline :type elpa :module "vline")
+   ;; (:name col-highlight :type elpa :module "col-highlight" :depends (vline))
+   ;; (:name crosshairs :type elpa :module "crosshairs" :depends (hl-line+ col-highlight))
    (:name json-mode :type git :url "https://github.com/joshwnj/json-mode.git"
    	  :after (lambda ()
 		   (progn
@@ -181,7 +212,6 @@
    zencoding-mode
    color-theme
    color-theme-tango
-   js2-mode
    anything
    anything-complete
    anything-extension
