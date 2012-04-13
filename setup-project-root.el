@@ -12,6 +12,14 @@
 		   (setq project-root-find-files-command "hg locate")
                    ;;(message (car p))
 		   ))
+	("Qmake project"
+         :root-contains-files ("main.cpp")
+         ;; :filename-regex ,(regexify-ext-list '(h c cpp qml))
+         ;; :exclude-paths ("*.app"))
+         :on-hit (lambda (p) 
+		   (setq project-root-find-files-command "find . -iname \"*.h\" -o -iname \"*.cpp\" -o -iname \"*.pro\" -o -iname \"*.qml\"")
+		   
+		   ))
 	)
       )
 
