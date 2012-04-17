@@ -4,20 +4,29 @@
          :root-contains-files (".git/index")
          :on-hit (lambda (p) 
 		   (setq project-root-find-files-command "git ls-files")
-		   ;;(message (car p))
+
 		   ))
 	("Mercurial Project"
          :root-contains-files (".hg/store")
          :on-hit (lambda (p) 
 		   (setq project-root-find-files-command "hg locate")
-                   ;;(message (car p))
+
 		   ))
 	("Qmake project"
          :root-contains-files ("main.cpp")
          ;; :filename-regex ,(regexify-ext-list '(h c cpp qml))
          ;; :exclude-paths ("*.app"))
          :on-hit (lambda (p) 
+		   ;; Just run find files with some nice filetypes
 		   (setq project-root-find-files-command "find . -iname \"*.h\" -o -iname \"*.cpp\" -o -iname \"*.pro\" -o -iname \"*.qml\"")
+		   ;; Simple qmake
+		   (setq project-root-configure-command "qmake")
+		   ;; Compile
+		   (setq project-root-compile-command "make -k -j")
+		   ;; Clean
+		   (setq project-root-clean-command "make clean")
+		   ;; Grep the target file from the project, add prefix './' and execute
+		   (setq project-root-run-command "` grep 'TARGET   ' Makefile | sed 's|.*= \\(.*\\)|./\\1|'`")
 		   
 		   ))
 	)

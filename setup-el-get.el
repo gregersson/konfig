@@ -117,9 +117,18 @@
 	  :url "http://hg.piranha.org.ua/project-root/archive/tip.tar.gz"
 	  :after (lambda ()
 		   (require 'project-root)
+		   (global-set-key (kbd "<C-f7>") (lambda ()
+						  (interactive)
+						  (with-project-root (compile project-root-configure-command))))
+		   (global-set-key (kbd "<S-f7>") (lambda ()
+						  (interactive)
+						  (with-project-root (compile project-root-clean-command))))
 		   (global-set-key (kbd "<f7>") (lambda ()
 						  (interactive)
-						  (with-project-root (compile compile-command))))
+						  (with-project-root (compile project-root-compile-command))))
+		   (global-set-key (kbd "<f5>") (lambda ()
+						  (interactive)
+						  (with-project-root (compile project-root-run-command))))
 		   ))
    (:name shell-pop :type http
 	  :url "http://www.emacswiki.org/emacs/download/shell-pop.el"
