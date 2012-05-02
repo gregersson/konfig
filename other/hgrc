@@ -6,8 +6,12 @@ asubrepos=/Users/greget/src/tools/hgscripts/asubrepos.py
 color=
 purge=
 hgk=
+hgext.bookmarks =
+hggit=/Users/greget/src/github/hg-git/hggit
+
 [defaults]
 pull=-u
 diff=--color=always
+
 [hgk]
 path=/usr/local/bin/hgk

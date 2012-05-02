@@ -7,6 +7,9 @@
 (if (string-equal "darwin" (symbol-name system-type))
     (setenv "PATH" (concat "/usr/local/bin:/usr/local/sbin:" (getenv "PATH"))))
 
+;; 
+(setenv "LUA_PATH" "/Users/greget/src/lualint/?.lua;")
+
 ;; -- end of Required variables
 
 ;; Required goodies for some kd/kdext-stuffz

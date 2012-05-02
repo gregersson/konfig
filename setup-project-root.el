@@ -1,5 +1,22 @@
 (setq project-roots
       '(
+	("Lua project"
+         :root-contains-files ("main.lua")
+         ;; :filename-regex ,(regexify-ext-list '(h c cpp qml))
+         ;; :exclude-paths ("*.app"))
+         :on-hit (lambda (p) 
+		   ;; Just run find files with some nice filetypes
+		   (setq project-root-find-files-command "find . -iname \"*.lua\"")
+		   (setq project-root-configure-command "peak main.lua")
+		   ;; Compile
+		   (setq project-root-compile-command "lualint *.lua")
+		   ;; Clean
+		   (setq project-root-clean-command "peak main.lua")
+		   ;; 
+		   ;; Grep the target file from the project, add prefix './' and execute
+		   (setq project-root-run-command "peak main.lua")
+		   
+		   ))
 	("Git Project"
          :root-contains-files (".git/index")
          :on-hit (lambda (p) 
@@ -25,10 +42,14 @@
 		   (setq project-root-compile-command "make -k -j")
 		   ;; Clean
 		   (setq project-root-clean-command "make clean")
+		   ;; 
+		   (setq project-root-binary-command " grep 'TARGET   ' Makefile | sed 's|.*= \\(.*\\)|./\\1|'")
 		   ;; Grep the target file from the project, add prefix './' and execute
-		   (setq project-root-run-command "` grep 'TARGET   ' Makefile | sed 's|.*= \\(.*\\)|./\\1|'`")
+		   (setq project-root-run-command (concat "`" project-root-binary-command "`"))
 		   
 		   ))
+
+
 	)
       )
 

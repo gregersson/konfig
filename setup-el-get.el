@@ -111,12 +111,17 @@
 
 
    (:name lua-mode :type elpa)
+   (:name sml-modeline :type elpa
+	  :after (lambda ()
+		   (scroll-bar-mode -1)
+		   (sml-modeline-mode t)
+		   ))
    (:name project-root
 	  :type http-tar
+	  :module "project-root"
 	  :options ("xzf")
 	  :url "http://hg.piranha.org.ua/project-root/archive/tip.tar.gz"
 	  :after (lambda ()
-		   (require 'project-root)
 		   (global-set-key (kbd "<C-f7>") (lambda ()
 						  (interactive)
 						  (with-project-root (compile project-root-configure-command))))
@@ -129,6 +134,9 @@
 		   (global-set-key (kbd "<f5>") (lambda ()
 						  (interactive)
 						  (with-project-root (compile project-root-run-command))))
+		   (global-set-key (kbd "<C-f5>") (lambda ()
+						  (interactive)
+						  (with-project-root (gud-gdb (concat "`" project-root-binary-command "`")))))
 		   ))
    (:name shell-pop :type http
 	  :url "http://www.emacswiki.org/emacs/download/shell-pop.el"
