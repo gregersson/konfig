@@ -159,6 +159,14 @@
 ;; Make ediff split windows horizontally as default.
 (setq ediff-split-window-function 'split-window-horizontally)
 
+
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'reverse)
+(setq uniquify-separator "/")
+(setq uniquify-after-kill-buffer-p t) ; rename after killing uniquified
+(setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
+
+
 ;;--------------
 ;; todos:
 ;; fix fuzzy matching for ac-complete, other stuff too?
