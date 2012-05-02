@@ -111,10 +111,18 @@
 
 
    (:name lua-mode :type elpa)
-   (:name sml-modeline :type elpa
-	  :after (lambda ()
+   ;; (:name sml-modeline :type elpa
+   ;; 	  :after (lambda ()
+   ;; 		   (scroll-bar-mode -1)
+   ;; 		   (sml-modeline-mode t)
+   ;; 		   ))
+   (:name nyan-mode :type git
+	  :url "https://github.com/TeMPOraL/nyan-mode.git"
+	  :module "nyan-mode"
+	  :after (lambda()
 		   (scroll-bar-mode -1)
-		   (sml-modeline-mode t)
+		   (require 'nyan-mode)
+		   (nyan-mode t)
 		   ))
    (:name project-root
 	  :type http-tar
