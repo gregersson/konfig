@@ -99,11 +99,14 @@
 		   (defun get-thesaurus-api-key-from-file ()
 		     "Return thesaurus api key file content."
 		     (with-temp-buffer
-		       (insert-file-contents "~/Dropbox/dotfiles/thesaurusapikey.txt")
-		       (while (search-forward "
+		       (if (file-exists-p "~/Dropbox/dotfiles/thesaurusapikey.txt")
+			   (progn
+			     (insert-file-contents "~/Dropbox/dotfiles/thesaurusapikey.txt")
+			     (while (search-forward "
 " nil t)
-			 (replace-match "" nil t))
-		       (buffer-string)))
+			       (replace-match "" nil t))
+			     )
+		       (buffer-string))))
 		   (setq thesaurus-bhl-api-key (get-thesaurus-api-key-from-file))
 		   (setq thesaurus-prompt-mechanism 'dropdown-list)
 		   )
@@ -124,27 +127,48 @@
 		   (require 'nyan-mode)
 		   (nyan-mode t)
 		   ))
+   ;; (:name ectags-select :type git
+   ;; 	  :url "https://github.com/emacsmirror/ectags-select.git"
+   ;; 	  :module "ectags-select"
+   ;; 	  :after (lambda()
+   ;; 		   (global-set-key "\M-." 'ectags-select-find-tag-at-point)
+   ;; 		   )
+   ;; 	  )
+	  
+   (:name etags-select :type git
+	  :url "https://github.com/emacsmirror/etags-select.git"
+	  :module "ectags-select"
+	  :after (lambda()
+		   (global-set-key "\M-." 'etags-select-find-tag-at-point)
+		   )
+	  )
    (:name project-root
 	  :type http-tar
 	  :module "project-root"
 	  :options ("xzf")
 	  :url "http://hg.piranha.org.ua/project-root/archive/tip.tar.gz"
 	  :after (lambda ()
+		   (require 'project-root)
 		   (global-set-key (kbd "<C-f7>") (lambda ()
 						  (interactive)
-						  (with-project-root (compile project-root-configure-command))))
+						  (project-root-configure)
+						  ))
 		   (global-set-key (kbd "<S-f7>") (lambda ()
 						  (interactive)
-						  (with-project-root (compile project-root-clean-command))))
+						  (project-root-clean)
+						  ))
 		   (global-set-key (kbd "<f7>") (lambda ()
 						  (interactive)
-						  (with-project-root (compile project-root-compile-command))))
+						  (project-root-compile)
+						  ))
 		   (global-set-key (kbd "<f5>") (lambda ()
 						  (interactive)
-						  (with-project-root (compile project-root-run-command))))
+						  (project-root-run)
+						  ))
 		   (global-set-key (kbd "<C-f5>") (lambda ()
 						  (interactive)
-						  (with-project-root (gud-gdb (concat "`" project-root-binary-command "`")))))
+						  (project-root-debug)
+						  ))
 		   ))
    (:name shell-pop :type http
 	  :url "http://www.emacswiki.org/emacs/download/shell-pop.el"
@@ -184,7 +208,18 @@
 		   (load-library "kdcomplete.el")
 		   )
 	  )
-   (:name sunrise-commander :type elpa)
+   (:name graphviz-dot-mode :type git :url "https://github.com/remvee/graphviz-dot-mode.git"
+	  :after (lambda ()
+		   (load-library "graphviz-dot-mode.el")
+		   (setq graphviz-dot-auto-indent-on-semi nil)
+		   )
+	  )
+   (:name sunrise-commander
+	  :type git
+	  :url "https://github.com/escherdragon/sunrise-commander.git"
+	  :features sunrise-commander
+
+	  )
    (:name smex
    	  :after (lambda ()
    		   (setq smex-save-file "~/.emacs.d/.smex-items")
@@ -201,7 +236,15 @@
 		   (global-set-key (kbd "C-x C-/") 'goto-last-change))
 	  )
    (:name js2-mode :type git :url "https://github.com/mooz/js2-mode.git" :module "js2-mode")
-   (:name redo+ :type elpa)
+   (:name redo+ :type git
+	  :url "https://github.com/emacsmirror/redo-plus.git"
+	  :after (lambda ()
+		   ;; Better undo / redo handling
+		   (require 'redo+)
+		   (global-set-key  [?\M-_] 'redo)
+		   )
+
+	  )
    ;; (:name hl-line+ :type elpa :module "hl-line+")
    ;; (:name vline :type elpa :module "vline")
    ;; (:name col-highlight :type elpa :module "col-highlight" :depends (vline))
@@ -244,7 +287,6 @@
    redo+
    lua-mode
    smex
-   sunrise-commander
    json-mode
    ace-jump-mode
    project-root
@@ -261,9 +303,9 @@
 ;;
 ;; Note: el-get-install requires git, so we know we have at least that.
 ;;
-(when (el-get-executable-find "cvs")
-  ;; the debian addons for emacs
-  (add-to-list 'my:el-get-packages 'emacs-goodies-el))
+;; (when (el-get-executable-find "cvs")
+;;   ;; the debian addons for emacs
+;;   (add-to-list 'my:el-get-packages 'emacs-goodies-el))
 
 (when (el-get-executable-find "svn")
   (loop for p in '(psvn    		; M-x svn-status

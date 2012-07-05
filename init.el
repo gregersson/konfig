@@ -1,5 +1,10 @@
 ;; Required variables!
-(setq konfig-home "/Users/greget/konfig/")
+(if (file-exists-p "/Users/greget/konfig")
+    (setq konfig-home "/Users/greget/konfig/")
+  )
+(if (file-exists-p "/Users/pgregersson/konfig")
+     (setq konfig-home "/Users/pgregersson/konfig/")
+     )
 (setq load-path (cons konfig-home load-path))
 (setq el-get-user-package-directory "Users/greget/konfig/package-configs")
 
@@ -7,7 +12,7 @@
 (if (string-equal "darwin" (symbol-name system-type))
     (setenv "PATH" (concat "/usr/local/bin:/usr/local/sbin:" (getenv "PATH"))))
 
-;; 
+;;
 (setenv "LUA_PATH" "/Users/greget/src/lualint/?.lua;")
 
 ;; -- end of Required variables
@@ -62,9 +67,10 @@
 ;; IDO!
 (ido-mode t)
 
-;; Better undo / redo handling
-(require 'redo+)
-(global-set-key  [?\M-_] 'redo)
+(global-set-key  (kbd "<f6>") 'bury-buffer)
+(global-set-key  (kbd "S-<f6>") '(lambda()
+				   (interactive)
+				   (kill-buffer (buffer-name))))
 
 ;; Go to next error if available
 (global-set-key (kbd "<f4>") 'next-error)
@@ -130,12 +136,12 @@
 ;; Tramp default to type ssh
 (setq tramp-default-method "ssh")
 
-;; Show kill ring in other buffer
-(require 'browse-kill-ring)
-;; M-y shows kill ring in other buffer.
-(browse-kill-ring-default-keybindings)
-;; Restore windows after selecting something from kill-ring browser
-(setq browse-kill-ring-quit-action 'save-and-restore)
+;; ;; Show kill ring in other buffer
+;; (require 'browse-kill-ring)
+;; ;; M-y shows kill ring in other buffer.
+;; (browse-kill-ring-default-keybindings)
+;; ;; Restore windows after selecting something from kill-ring browser
+;; (setq browse-kill-ring-quit-action 'save-and-restore)
 
 ;; A library that saves the last position in files
 (require 'saveplace)
@@ -150,11 +156,30 @@
 
 ;; Grep tool goodness
 (require 'grep)
+
 ;; Include .m and .mm files in the filetype alias 'cchh'
 (add-to-list
  'grep-files-aliases
  '("cchh" .  "*.cc *.[ch]xx *.[ch]pp *.[CHh] *.CC *.HH *.[ch]++ *.m *.mm")
  )
+
+; Fix the x / emacs cut & paste mystery
+(setq x-select-enable-clipboard t)
+
+
+(require 'thingatpt)
+
+(if (file-exists-p "setup-rim.el") 
+    (load-library "setup-rim.el")
+  )
+
+(defun quick-rgrep (term)
+   (interactive (list (completing-read "Search Term: " nil nil nil (thing-at-point 'word))))
+  (grep-compute-defaults)
+
+  (with-project-root
+      (rgrep term "*.cc *.[ch]xx *.[ch]pp *.[CHh] *.CC *.HH *.[ch]++ *.qml *.descriptor" default-directory)))
+(global-set-key "\M-r" 'quick-rgrep)
 
 ;; Make ediff split windows horizontally as default.
 (setq ediff-split-window-function 'split-window-horizontally)
@@ -165,6 +190,40 @@
 (setq uniquify-separator "/")
 (setq uniquify-after-kill-buffer-p t) ; rename after killing uniquified
 (setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
+
+
+(require 'whitespace)
+;; (setq whitespace-style '(face empty tabs lines-tail trailing))
+;;(global-whitespace-mode t)
+
+(setq tags-table-list
+           '("/tmp"))
+
+;; Follow the compilation buffer!
+(setq compilation-scroll-output t)
+
+;; nuke whitespaces when writing to a file
+;; (add-hook 'before-save-hook 'whitespace-cleanup)
+
+
+(defun uniq-lines (beg end)
+  "Unique lines in region.
+Called from a program, there are two arguments:
+BEG and END (region to sort)."
+  (interactive "r")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region beg end)
+      (goto-char (point-min))
+      (while (not (eobp))
+        (kill-line 1)
+        (yank)
+        (let ((next-line (point)))
+          (while
+              (re-search-forward
+               (format "^%s" (regexp-quote (car kill-ring))) nil t)
+            (replace-match "" nil nil))
+          (goto-char next-line))))))
 
 
 ;;--------------
@@ -183,4 +242,3 @@
 ;; linenumbers, percent, gutter summary?
 ;; qml-mode
 ;; popup-shell in folder of file.
-

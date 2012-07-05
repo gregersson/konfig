@@ -1,5 +1,13 @@
 (setq project-roots
       '(
+	("TAD"
+         :root-contains-files ("build/generate_ninja_makefile.sh")
+         ;; :filename-regex ,(regexify-ext-list '(h c cpp qml))
+         ;; :exclude-paths ("*.app"))
+         :on-hit (lambda (p) 
+		   (setup-project-root-tad)
+		   )
+	 )
 	("Lua project"
          :root-contains-files ("main.lua")
          ;; :filename-regex ,(regexify-ext-list '(h c cpp qml))
