@@ -1,5 +1,6 @@
 (add-to-list 'el-get-sources
-	     '(:Name anything :type elpa
+	     '(:name anything 
+		     :type elpa
 		     :after (lambda () 
 			      ;;(global-set-key (kbd "<C-M-x>") 'anything)
 			      (global-set-key "\230" (quote anything))
@@ -8,6 +9,7 @@
 (add-to-list 'el-get-sources
 	     '(:name anything-complete 
 		     :type elpa
+		     :url
 		     :depends anything))
 
 (add-to-list 'el-get-sources

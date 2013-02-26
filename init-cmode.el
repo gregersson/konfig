@@ -4,8 +4,24 @@
   (setq c-basic-offset tab-width)
   (setq indent-tabs-mode nil) ;; force only spaces for indentation
   (auto-complete-mode 1)
-  
+  (c-set-offset 'innamespace '0)
 )
+
+(c-add-style "template-coding-style"
+         '((c-basic-offset . 3)
+           (c-comment-only-line-offset . 0)
+           (c-hanging-braces-alist . ((substatement-open before after)))
+           (c-offsets-alist . ((topmost-intro        . 0)
+                   (topmost-intro-cont   . 0)
+                   (substatement         . 3)
+                   (substatement-open    . 0)
+                   (statement-case-open  . 3)
+                   (statement-cont       . 3)
+                   (access-label         . -3)
+                   (inclass              . 3)
+                   (inline-open          . 3)
+                   (innamespace          . 0)
+                   ))))
 
 (setq cc-other-file-alist
       '(("\\.cc\\'"  (".hh" ".h"))
@@ -26,7 +42,7 @@
         ("\\.c\\+\\+\\'" (".h++" ".hh" ".h"))
         ("\\.h\\+\\+\\'" (".c++"))
 
-        ("\\.cpp\\'" (".hpp" ".hh" ".h"))
+        ("\\.cpp\\'" (".hpp" ".hh" ".h" "_p.h"))
         ("\\.hpp\\'" (".cpp"))
 
         ("\\.cxx\\'" (".hxx" ".hh" ".h"))
@@ -86,6 +102,7 @@
   )
 (define-key objc-mode-map "]" 'kd-bracketize2)
 (define-key c-mode-base-map (kbd "C-\366") 'kdext-add-braces-with-semicolon) ;; C-ö
+(define-key c-mode-base-map (kbd "C-C C-s") 'idomenu)
 
 (c-add-style "qt-gnu" '("gnu" 
                         (c-access-key .

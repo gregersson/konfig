@@ -65,6 +65,7 @@
 (defun ido-project-root-find-file ()
   "Use ido to select a file from the project."
   (interactive)
+  (with-project-root
   (let (my-project-root project-files tbl)
     (unless project-details (project-root-fetch))
     (setq my-project-root (cdr project-details))
@@ -88,12 +89,21 @@
               (setq key (replace-regexp-in-string my-project-root "" key))
               ;; remove trailing | or /
               (setq key (replace-regexp-in-string "\\(|\\|/\\)$" "" key))
+              ;; Remove path
+              (let ((split-key (split-string key "/")))
+		(if (> (length split-key) 1)
+		    (setq key (concat (car (nthcdr (- (length split-key) 2) split-key))
+				      "/"
+				      (car (nthcdr (- (length split-key) 1) split-key))
+				      ))
+		  )
+		)
               (puthash key path tbl)
               (push key ido-list)
               )
             project-files
             )
-      (find-file (gethash (ido-completing-read "project-files: " ido-list) tbl)))))
+      (find-file (gethash (ido-completing-read "project-files: " ido-list) tbl))))))
 
 (global-set-key "" (quote ido-project-root-find-file))
 (global-set-key "f" (quote ido-project-root-find-file))

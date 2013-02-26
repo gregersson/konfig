@@ -45,8 +45,9 @@
 	  :type git
 	  :url "https://github.com/winterTTr/ace-jump-mode"
 	  :after (lambda ()
+		   (require 'ace-jump-mode)
 		   ;; C-' 
-		   (global-set-key [67108903] 'ace-jump-mode)
+		   (global-set-key [67108903] 'ace-jump-char-mode)
 		   )
 	  )
    (:name qml-mode
@@ -169,6 +170,10 @@
 						  (interactive)
 						  (project-root-debug)
 						  ))
+		   (global-set-key (kbd "<M-f5>") (lambda ()
+						  (interactive)
+						  (project-root-leakcheck)
+						  ))
 		   ))
    (:name shell-pop :type http
 	  :url "http://www.emacswiki.org/emacs/download/shell-pop.el"
@@ -202,12 +207,12 @@
 		       (require 'auto-complete-config)
 		       (ac-config-default)))
 
-   (:name kdcomplete :type git :url "https://github.com/BinaryPeak/kdcomplete"
-	  :depends (auto-complete yasnippet)
-	  :after (lambda ()
-		   (load-library "kdcomplete.el")
-		   )
-	  )
+   ;; (:name kdcomplete :type git :url "https://github.com/BinaryPeak/kdcomplete"
+   ;; 	  :depends (auto-complete yasnippet)
+   ;; 	  :after (lambda ()
+   ;; 		   (load-library "kdcomplete.el")
+   ;; 		   )
+   ;; 	  )
    (:name graphviz-dot-mode :type git :url "https://github.com/remvee/graphviz-dot-mode.git"
 	  :after (lambda ()
 		   (load-library "graphviz-dot-mode.el")
@@ -220,6 +225,12 @@
 	  :features sunrise-commander
 
 	  )
+;;   (:name org-confluence
+;;	  :type git
+;;	  :url "https://github.com/hgschmie/org-confluence.git"
+;;	  :features org-confluence
+;;	  :depends (org-mode)
+;;	  )
    (:name smex
    	  :after (lambda ()
    		   (setq smex-save-file "~/.emacs.d/.smex-items")
@@ -228,7 +239,19 @@
    (:name magit
 	  :after (lambda ()
 		   (global-set-key (kbd "C-x C-z") 'magit-status)))
-
+   (:name mo-git-blame
+    :type git
+    :url "http://github.com/mbunkus/mo-git-blame.git"
+    :depends (magit)
+    )
+;;   (:name ws-trim
+;;	  :type git
+;;	  :url "https://github.com/emacsmirror/ws-trim.git"
+;;	  :after (lambda ()
+;;		   (require 'ws-trim)
+;;		   (global-ws-trim-mode t)
+;;		   )
+;;	  )
    (:name goto-last-change		; move pointer back to last change
 	  :after (lambda ()
 		   ;; when using AZERTY keyboard, consider C-x C-_
@@ -264,7 +287,39 @@
 		     )
 		   )
 	  )
+   (:name guess-offset :type git :url "https://github.com/emacsmirror/guess-offset.git"
+	  :description "Guesses the tab width from the current indentation"
+   	  :after (lambda ()
+		   (progn
+		     (require 'guess-offset)
+		     )
+		   )
+	  )
+   (:name gdb-mi :type git :url "https://github.com/emacsmirror/gdb-mi.git"
+	  )
+   (:name highlight :type emacswiki :url "http://www.emacswiki.org/emacs-en/download/highlight.el"
+	  )
+   (:name idomenu :type emacswiki :url "http://www.emacswiki.org/emacs/download/idomenu.el"
+	  :after (lambda ()
+		   (progn 
+		     (require 'idomenu)
+		     (global-set-key  (kbd "C-c C-s") 'idomenu)
+		     )))
+   ;; (:name member-functions
+   ;; 	  :type git
+   ;; 	  :url "https://github.com/emacsmirror/member-functions.git"
+   ;; 	  :after (lambda ()
+   ;; 		   (progn
+   ;; 		     (autoload 'expand-member-functions "member-functions" "Expand C++ member function declarations" t)
+   ;; 		     (add-hook 'c++-mode-hook (lambda () 
+   ;; 						(local-set-key "\C-cm" #'expand-member-functions)
+   ;; 						))))
+   ;; 	  )
+;;   (:name org-mode :type git :url "https://orgmode.org/org-mode.git"
+;;    	  )
+
    )
+
  )
 
 ;;(load-library "recipes/recipe-company.el")
@@ -290,7 +345,7 @@
    json-mode
    ace-jump-mode
    project-root
-   kdcomplete
+;;   kdcomplete
    thesaurus
    fuzzy
 ))
@@ -319,7 +374,7 @@
        my:el-get-packages
        (loop for src in el-get-sources collect (el-get-source-name src))))
 
-;; (defun print-elements-of-list (list)
+; (defun print-elements-of-list (list)
 ;;        "Print each element of LIST on a line of its own."
 ;;        (while list
 ;;          (print (car list))

@@ -55,6 +55,7 @@
        '("\\(.\\|\n\\)*\n@protocol" . objc-mode)
        '("\\(.\\|\n\\)*\nsignals:" . c++-mode)
        '("\\(.\\|\n\\)*\nslots:" . c++-mode)
+       '("\\(.\\|\n\\)*\nnamespace " . c++-mode)
        '("\\(.\\|\n\\)*\n#include <QObject>" . c++-mode)
        )
       magic-mode-alist))
@@ -193,8 +194,8 @@
 
 
 (require 'whitespace)
-;; (setq whitespace-style '(face empty tabs lines-tail trailing))
-;;(global-whitespace-mode t)
+(setq whitespace-style '(face empty tabs lines-tail trailing))
+(global-whitespace-mode t)
 
 (setq tags-table-list
            '("/tmp"))
@@ -225,6 +226,76 @@ BEG and END (region to sort)."
             (replace-match "" nil nil))
           (goto-char next-line))))))
 
+
+(defun move-text-internal (arg)
+  (cond
+   ((and mark-active transient-mark-mode)
+    (if (> (point) (mark))
+        (exchange-point-and-mark))
+    (let ((column (current-column))
+          (text (delete-and-extract-region (point) (mark))))
+      (forward-line arg)
+      (move-to-column column t)
+      (set-mark (point))
+      (insert text)
+      (exchange-point-and-mark)
+      (setq deactivate-mark nil)))
+   (t
+    (let ((column (current-column)))
+      (beginning-of-line)
+      (when (or (> arg 0) (not (bobp)))
+        (forward-line)
+        (when (or (< arg 0) (not (eobp)))
+          (transpose-lines arg))
+        (forward-line -1))
+      (move-to-column column t)))))
+
+(defun move-text-down (arg)
+  "Move region (transient-mark-mode active) or current line
+  arg lines down."
+  (interactive "*p")
+  (move-text-internal arg))
+
+(defun move-text-up (arg)
+  "Move region (transient-mark-mode active) or current line
+  arg lines up."
+  (interactive "*p")
+  (move-text-internal (- arg)))
+
+
+(global-set-key [M-up] 'move-text-up)
+(global-set-key [M-down] 'move-text-down)
+
+(defun init-project-root ()
+  (interactive)
+  (progn
+    ;; (load-library "init.el")
+    (load-library "setup-rim.el")
+    (setup-project-root-tad)
+    (project-root-goto-root)
+    )
+  )
+
+(global-set-key (kbd "C-c l")
+  (lambda ()
+    (interactive)
+    (goto-line (line-number-at-pos) (window-buffer (next-window)))))
+
+(global-set-key (kbd "C-x t w")
+		'doremi-window-height+
+		)
+
+(defun delete-word (arg)
+  "Delete characters forward until encountering the end of a word.
+With argument, do this that many times."
+  (interactive "p")
+  (delete-region (point) (progn (forward-word arg) (point))))
+(defun backward-delete-word (arg)
+  "Delete characters backward until encountering the end of a word.
+With argument, do this that many times."
+  (interactive "p")
+  (delete-word (- arg)))
+(global-set-key [backspace] (quote backward-delete-word))
 
 ;;--------------
 ;; todos:
