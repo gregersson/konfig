@@ -25,7 +25,7 @@
 (setq
  el-get-sources
  '((:name buffer-move
-	  :after (lambda ()
+	  :after (progn
 		   ; Setup key bindings
 		   (global-set-key (kbd "<C-S-up>")     'buf-move-up)
 		   (global-set-key (kbd "<C-S-down>")   'buf-move-down)
@@ -44,7 +44,7 @@
 	  :description "a quick cursor location minor mode for emacs"
 	  :type git
 	  :url "https://github.com/winterTTr/ace-jump-mode"
-	  :after (lambda ()
+	  :after (progn
 		   (require 'ace-jump-mode)
 		   ;; C-' 
 		   (global-set-key [67108903] 'ace-jump-char-mode)
@@ -53,22 +53,22 @@
    (:name qml-mode
 	  :type git
 	  :url "https://github.com/cataska/qml-mode.git"
-	  :after (lambda ()
+	  :after (progn
 		   (require 'qml-mode)
 		   (add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
 		   )
 	  )
-   (:name highlight-indentation :type git
-	  :url "https://github.com/antonj/Highlight-Indentation-for-Emacs.git"
-	  :after (lambda ()
-		   (require 'highlight-indentation)
-		   (set-face-background 'highlight-indentation-face "#f3f3e8")
-		   (set-face-background 'highlight-indentation-current-column-face "#c3b3b3")
-		   )
-	  )
+;;   (:name highlight-indentation :type git
+;;	  :url "https://github.com/antonj/Highlight-Indentation-for-Emacs.git"
+;;	  :after (progn
+;;		   (require 'highlight-indentation)
+;;		   (set-face-background 'highlight-indentation-face "#f3f3e8")
+;;		   (set-face-background 'highlight-indentation-current-column-face "#c3b3b3")
+;;		   )
+;;	  )
    ;; (:name minimap :type git
    ;; 	  :url "https://github.com/dustinlacewell/emacs-minimap.git"
-   ;; 	  :after (lambda ()
+   ;; 	  :after (progn
    ;; 		   (require 'minimap)
    ;; 		   (setq minimap-font-face '((default :family "DejaVu Sans Mono" :height 50)))
    ;; 		   (setq minimap-update-delay 0)
@@ -79,9 +79,9 @@
    ;; 	  )
    (:name yasnippet :type git
 	  :url "https://github.com/capitaomorte/yasnippet.git"
-	  :after (lambda ()
+	  :after (progn
 		   (require 'yasnippet)
-		   (yas/initialize)
+		   ;;(yas/initialize)
 
 		   ;; Develop in ~/konfig/snippets, but also
 		   ;; use standard snippet directory
@@ -95,7 +95,7 @@
    (:name fuzzy :type elpa)
    (:name thesaurus :type http
 	  :url "http://www.emacswiki.org/emacs/download/thesaurus.el"
-	  :after (lambda ()
+	  :after (progn
 		   (require 'thesaurus)
 		   (defun get-thesaurus-api-key-from-file ()
 		     "Return thesaurus api key file content."
@@ -116,14 +116,14 @@
 
    (:name lua-mode :type elpa)
    ;; (:name sml-modeline :type elpa
-   ;; 	  :after (lambda ()
+   ;; 	  :after (progn
    ;; 		   (scroll-bar-mode -1)
    ;; 		   (sml-modeline-mode t)
    ;; 		   ))
    (:name nyan-mode :type git
 	  :url "https://github.com/TeMPOraL/nyan-mode.git"
 	  :module "nyan-mode"
-	  :after (lambda()
+	  :after (progn
 		   (scroll-bar-mode -1)
 		   (require 'nyan-mode)
 		   (nyan-mode t)
@@ -131,7 +131,7 @@
    ;; (:name ectags-select :type git
    ;; 	  :url "https://github.com/emacsmirror/ectags-select.git"
    ;; 	  :module "ectags-select"
-   ;; 	  :after (lambda()
+   ;; 	  :after (progn
    ;; 		   (global-set-key "\M-." 'ectags-select-find-tag-at-point)
    ;; 		   )
    ;; 	  )
@@ -139,7 +139,7 @@
    (:name etags-select :type git
 	  :url "https://github.com/emacsmirror/etags-select.git"
 	  :module "ectags-select"
-	  :after (lambda()
+	  :after (progn
 		   (global-set-key "\M-." 'etags-select-find-tag-at-point)
 		   )
 	  )
@@ -147,8 +147,9 @@
 	  :type http-tar
 	  :module "project-root"
 	  :options ("xzf")
-	  :url "http://hg.piranha.org.ua/project-root/archive/tip.tar.gz"
-	  :after (lambda ()
+	  :url "https://bitbucket.org/piranha/project-root/get/tip.tar.gz"
+	  ;;:url "http://hg.piranha.org.ua/project-root/archive/tip.tar.gz"
+	  :after (progn
 		   (require 'project-root)
 		   (global-set-key (kbd "<C-f7>") (lambda ()
 						  (interactive)
@@ -177,7 +178,7 @@
 		   ))
    (:name shell-pop :type http
 	  :url "http://www.emacswiki.org/emacs/download/shell-pop.el"
-	  :after (lambda ()
+	  :after (progn
 		   (require 'shell-pop)
 		   ;; Or "ansi-term" if you prefer
 		   ;; (shell-pop-set-internal-mode "eshell")
@@ -196,25 +197,26 @@
 		   (global-set-key (kbd "M-§") 'shell-pop)
 		   )
 	  )
-   (:name auto-complete
-	  :type git
-	  :url "https://github.com/YorkZ/auto-complete.git"
-	  :depends popup
-	  :load-path "."
-	  :post-init (lambda ()
-		       (require 'auto-complete)
-		       (add-to-list 'ac-dictionary-directories (expand-file-name "dict" pdir))
-		       (require 'auto-complete-config)
-		       (ac-config-default)))
+;;(:name auto-complete
+;;	  :type git
+;;	  :url "https://github.com/YorkZ/auto-complete.git"
+;;	  ;;:depends popup
+;;	  :load-path "."
+;;	  :post-init (progn
+;;		       (require 'auto-complete)
+;;		       (add-to-list 'ac-dictionary-directories (expand-file-name "dict" pdir))
+;;		       (require 'auto-complete-config)
+;;		       (ac-config-default)))
+;;
 
    ;; (:name kdcomplete :type git :url "https://github.com/BinaryPeak/kdcomplete"
    ;; 	  :depends (auto-complete yasnippet)
-   ;; 	  :after (lambda ()
+   ;; 	  :after (progn
    ;; 		   (load-library "kdcomplete.el")
    ;; 		   )
    ;; 	  )
    (:name graphviz-dot-mode :type git :url "https://github.com/remvee/graphviz-dot-mode.git"
-	  :after (lambda ()
+	  :after (progn
 		   (load-library "graphviz-dot-mode.el")
 		   (setq graphviz-dot-auto-indent-on-semi nil)
 		   )
@@ -232,12 +234,12 @@
 ;;	  :depends (org-mode)
 ;;	  )
    (:name smex
-   	  :after (lambda ()
+   	  :after (progn
    		   (setq smex-save-file "~/.emacs.d/.smex-items")
    		   (global-set-key (kbd "M-x") 'smex)
    		   (global-set-key (kbd "M-X") 'smex-major-mode-commands)))
    (:name magit
-	  :after (lambda ()
+	  :after (progn
 		   (global-set-key (kbd "C-x C-z") 'magit-status)))
    (:name mo-git-blame
     :type git
@@ -247,13 +249,13 @@
 ;;   (:name ws-trim
 ;;	  :type git
 ;;	  :url "https://github.com/emacsmirror/ws-trim.git"
-;;	  :after (lambda ()
+;;	  :after (progn
 ;;		   (require 'ws-trim)
 ;;		   (global-ws-trim-mode t)
 ;;		   )
 ;;	  )
    (:name goto-last-change		; move pointer back to last change
-	  :after (lambda ()
+	  :after (progn
 		   ;; when using AZERTY keyboard, consider C-x C-_
 		   ;; TODO: better keybinding!
 		   (global-set-key (kbd "C-x C-/") 'goto-last-change))
@@ -261,7 +263,7 @@
    (:name js2-mode :type git :url "https://github.com/mooz/js2-mode.git" :module "js2-mode")
    (:name redo+ :type git
 	  :url "https://github.com/emacsmirror/redo-plus.git"
-	  :after (lambda ()
+	  :after (progn
 		   ;; Better undo / redo handling
 		   (require 'redo+)
 		   (global-set-key  [?\M-_] 'redo)
@@ -273,7 +275,7 @@
    ;; (:name col-highlight :type elpa :module "col-highlight" :depends (vline))
    ;; (:name crosshairs :type elpa :module "crosshairs" :depends (hl-line+ col-highlight))
    (:name json-mode :type git :url "https://github.com/joshwnj/json-mode.git"
-   	  :after (lambda ()
+   	  :after (progn
 		   (progn
 		     (load-library "json-mode/json-mode.el")
 		     (defun beautify-json ()
@@ -289,7 +291,7 @@
 	  )
    (:name guess-offset :type git :url "https://github.com/emacsmirror/guess-offset.git"
 	  :description "Guesses the tab width from the current indentation"
-   	  :after (lambda ()
+   	  :after (progn
 		   (progn
 		     (require 'guess-offset)
 		     )
@@ -297,10 +299,8 @@
 	  )
    (:name gdb-mi :type git :url "https://github.com/emacsmirror/gdb-mi.git"
 	  )
-   (:name highlight :type emacswiki :url "http://www.emacswiki.org/emacs-en/download/highlight.el"
-	  )
    (:name idomenu :type emacswiki :url "http://www.emacswiki.org/emacs/download/idomenu.el"
-	  :after (lambda ()
+	  :after (progn
 		   (progn 
 		     (require 'idomenu)
 		     (global-set-key  (kbd "C-c C-s") 'idomenu)
@@ -308,10 +308,10 @@
    ;; (:name member-functions
    ;; 	  :type git
    ;; 	  :url "https://github.com/emacsmirror/member-functions.git"
-   ;; 	  :after (lambda ()
+   ;; 	  :after (progn
    ;; 		   (progn
    ;; 		     (autoload 'expand-member-functions "member-functions" "Expand C++ member function declarations" t)
-   ;; 		     (add-hook 'c++-mode-hook (lambda () 
+   ;; 		     (add-hook 'c++-mode-hook (progn 
    ;; 						(local-set-key "\C-cm" #'expand-member-functions)
    ;; 						))))
    ;; 	  )
@@ -345,6 +345,7 @@
    json-mode
    ace-jump-mode
    project-root
+   highlight-indentation
 ;;   kdcomplete
    thesaurus
    fuzzy

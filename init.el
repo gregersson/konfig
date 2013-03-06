@@ -6,7 +6,7 @@
      (setq konfig-home "/Users/pgregersson/konfig/")
      )
 (setq load-path (cons konfig-home load-path))
-(setq el-get-user-package-directory "Users/greget/konfig/package-configs")
+(setq el-get-user-package-directory "/Users/greget/konfig/package-configs")
 
 ;;; A quick & ugly PATH solution to Emacs on Mac OSX
 (if (string-equal "darwin" (symbol-name system-type))
@@ -296,7 +296,7 @@ With argument, do this that many times."
   (interactive "p")
   (delete-word (- arg)))
 (global-set-key [backspace] (quote backward-delete-word))
-
+(global-set-key (kbd "DEL") (quote backward-delete-word))
 ;;--------------
 ;; todos:
 ;; fix fuzzy matching for ac-complete, other stuff too?
