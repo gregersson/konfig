@@ -1,0 +1,4 @@
+(:name json-mode
+       :type github
+       :url "https://github.com/joshwnj/json-mode.git"
+       )

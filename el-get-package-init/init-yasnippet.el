@@ -1,0 +1,4 @@
+(progn
+  (require 'yasnippet)
+  ;; Placeholder
+  )

@@ -6,7 +6,6 @@
      (setq konfig-home "/Users/pgregersson/konfig/")
      )
 (setq load-path (cons konfig-home load-path))
-(setq el-get-user-package-directory "/Users/greget/konfig/package-configs")
 
 ;;; A quick & ugly PATH solution to Emacs on Mac OSX
 (if (string-equal "darwin" (symbol-name system-type))
@@ -60,7 +59,7 @@
        )
       magic-mode-alist))
 
-(load-library "init-cmode.el")
+;;(load-library "init-cmode.el")
 (global-set-key  [?\M-o] 'ff-find-other-file)
 (global-set-key  [C-M-up] 'ff-find-other-file)
 (global-set-key  [C-M-down] 'ff-find-other-file)

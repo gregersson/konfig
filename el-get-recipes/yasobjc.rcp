@@ -1,0 +1,5 @@
+(:name yasobjc
+       :type git
+       :url "https://github.com/roupam/yasobjc.git"
+       :depends (yasnippet)
+       )

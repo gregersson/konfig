@@ -1,0 +1,24 @@
+#export MAGICK_HOME="$HOME/src/scratch/ImageMagick-6.7.4"
+# MacPorts Installer addition on 2011-02-08_at_14:29:19: adding an appropriate PATH variable for use with MacPorts.
+#export PATH=$MAGICK_HOME/bin:/usr/local/share/python:/usr/local/sbin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:$PATH
+
+export PATH=/usr/local/sbin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:$PATH
+# Finished adapting your PATH environment variable for use with MacPorts.
+#export DYLD_LIBRARY_PATH="$MAGICK_HOME/lib/:$DYLD_LIBRARY_PATH"
+
+alias less='less -R'
+alias emacs='emacsclient -n -c'
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+ . `brew --prefix`/etc/bash_completion
+fi
+
+if [ -f `brew --prefix`/etc/bash_completion.d/git-completion.bash  ]; then
+  . `brew --prefix`/etc/bash_completion.d/git-completion.bash 
+fi
+if [ -f /usr/local/etc/bash_completion.d ]; then
+ . /usr/local/etc/bash_completion.d
+fi
+
+source ~/.bash_colors
+
+export LUA_PATH="$LUA_PATH;/Users/greget/src/lualint/?.lua"

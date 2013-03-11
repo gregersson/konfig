@@ -1,0 +1,4 @@
+(:name qml-mode
+       :type github
+       :url "https://github.com/cataska/qml-mode.git"
+       )

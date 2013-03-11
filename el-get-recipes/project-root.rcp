@@ -1,0 +1,7 @@
+(:name project-root
+       :type http-tar
+       :module "project-root"
+       :options ("xzf")
+       :url "https://bitbucket.org/piranha/project-root/get/tip.tar.gz"
+       ;;:url "http://hg.piranha.org.ua/project-root/archive/tip.tar.gz"
+)
