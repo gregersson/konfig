@@ -1,5 +1,5 @@
 (defun base-cc-style ()
-  (c-set-style "stroustrup")  
+  (c-set-style "stroustrup")
   (setq tab-width 4)
   (setq c-basic-offset tab-width)
   (setq indent-tabs-mode nil) ;; force only spaces for indentation
@@ -56,10 +56,10 @@
   (interactive)
 
   (let ((statement-start-position nil)
-  	(root-position nil)
-  	(search-cond nil)
-	(bracket-diff nil)
-  	)
+        (root-position nil)
+        (search-cond nil)
+        (bracket-diff nil)
+        )
 
     (save-excursion
       (c-beginning-of-statement 1)
@@ -70,20 +70,20 @@
       (setq root-position (point))
       (setq search-cond t)
       (while search-cond
-      	(progn
-      	  (if (not (eq (search-backward ":" nil t)  nil))
-      	      (if (> (point) statement-start-position)
-      		  (setq root-position (point))
-      		(setq search-cond nil)
-      		)
-      	    (setq search-cond nil)
-      	    )	  
-      	  )
-      	)
+        (progn
+          (if (not (eq (search-backward ":" nil t)  nil))
+              (if (> (point) statement-start-position)
+                  (setq root-position (point))
+                (setq search-cond nil)
+                )
+            (setq search-cond nil)
+            )     
+          )
+        )
       )
     (setq bracket-diff (- (count-matches "\\[" statement-start-position root-position)
-			  (count-matches "\\]" statement-start-position root-position))
-		     )
+                          (count-matches "\\]" statement-start-position root-position))
+                     )
     (save-excursion
       (goto-char root-position)
       (search-backward " ")
@@ -91,18 +91,22 @@
       
       ;; For var.x.y situations
       (while (eq (preceding-char) ?.)
-	  (backward-sexp)
-	  )
+          (backward-sexp)
+          )
       (if (<= bracket-diff 0)
-	  (insert-string "[")
-	)
+          (insert-string "[")
+        )
       )
     (insert-string "]")
     )
   )
-(define-key objc-mode-map "]" 'kd-bracketize2)
-(define-key c-mode-base-map (kbd "C-\366") 'kdext-add-braces-with-semicolon) ;; C-ö
-(define-key c-mode-base-map (kbd "C-C C-s") 'idomenu)
+
+(defun bind-c-keys-later ()
+  (define-key objc-mode-map "]" 'kd-bracketize2)
+  (define-key c-mode-base-map (kbd "C-\366") 'kdext-add-braces-with-semicolon) ;; C-ö
+  (define-key c-mode-base-map (kbd "C-C C-s") 'idomenu)
+  )
+(add-hook 'c-initialization-hook 'bind-c-keys-later);
 
 (c-add-style "qt-gnu" '("gnu" 
                         (c-access-key .

@@ -43,34 +43,16 @@
     )
   )
 
-;; Major modes
-(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
-
-;; C-style major modes
-(setq magic-mode-alist
-  (append (list
-       '("\\(.\\|\n\\)*\n@implementation" . objc-mode)
-       '("\\(.\\|\n\\)*\n@interface" . objc-mode)
-       '("\\(.\\|\n\\)*\n@protocol" . objc-mode)
-       '("\\(.\\|\n\\)*\nsignals:" . c++-mode)
-       '("\\(.\\|\n\\)*\nslots:" . c++-mode)
-       '("\\(.\\|\n\\)*\nnamespace " . c++-mode)
-       '("\\(.\\|\n\\)*\n#include <QObject>" . c++-mode)
-       )
-      magic-mode-alist))
-
-;;(load-library "init-cmode.el")
-(global-set-key  [?\M-o] 'ff-find-other-file)
-(global-set-key  [C-M-up] 'ff-find-other-file)
-(global-set-key  [C-M-down] 'ff-find-other-file)
-
 ;; IDO!
 (ido-mode t)
 
 (global-set-key  (kbd "<f6>") 'bury-buffer)
 (global-set-key  (kbd "S-<f6>") '(lambda()
-				   (interactive)
-				   (kill-buffer (buffer-name))))
+                                   (interactive)
+                                   (kill-buffer (buffer-name))))
+
+;; Insert spaces instead of tabs
+(setq-default indent-tabs-mode nil)
 
 ;; Go to next error if available
 (global-set-key (kbd "<f4>") 'next-error)
@@ -281,8 +263,8 @@ BEG and END (region to sort)."
     (goto-line (line-number-at-pos) (window-buffer (next-window)))))
 
 (global-set-key (kbd "C-x t w")
-		'doremi-window-height+
-		)
+                'doremi-window-height+
+                )
 
 (defun delete-word (arg)
   "Delete characters forward until encountering the end of a word.
@@ -296,6 +278,28 @@ With argument, do this that many times."
   (delete-word (- arg)))
 (global-set-key [backspace] (quote backward-delete-word))
 (global-set-key (kbd "DEL") (quote backward-delete-word))
+
+;; Major modes
+(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+
+;; C-style major modes
+(setq magic-mode-alist
+  (append (list
+       '("\\(.\\|\n\\)*\n@implementation" . objc-mode)
+       '("\\(.\\|\n\\)*\n@interface" . objc-mode)
+       '("\\(.\\|\n\\)*\n@protocol" . objc-mode)
+       '("\\(.\\|\n\\)*\nsignals:" . c++-mode)
+       '("\\(.\\|\n\\)*\nslots:" . c++-mode)
+       '("\\(.\\|\n\\)*\nnamespace " . c++-mode)
+       '("\\(.\\|\n\\)*\n#include <QObject>" . c++-mode)
+       )
+      magic-mode-alist))
+
+(load-library "init-cmode.el")
+(global-set-key  [?\M-o] 'ff-find-other-file)
+(global-set-key  [C-M-up] 'ff-find-other-file)
+(global-set-key  [C-M-down] 'ff-find-other-file)
+
 ;;--------------
 ;; todos:
 ;; fix fuzzy matching for ac-complete, other stuff too?
