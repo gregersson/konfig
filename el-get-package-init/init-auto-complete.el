@@ -9,4 +9,5 @@
                              ac-source-dictionary
                              ac-source-words-in-same-mode-buffers)
                 )
+  (add-to-list 'ac-modes 'objc-mode)
   )

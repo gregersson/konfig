@@ -24,46 +24,48 @@
 
 (setq my-packages
       (append
-       '(
-         el-get
-         vkill;; Kill processes from emacs
-         google-maps
-         yasnippet
-         buffer-move;; Move buffers around
-         ace-jump-mode;; Jump quickly to a word or character
-         qml-mode;;
-         ;; yasobjc
-         highlight-indentation;; Visual indicator for current indentation block
-         lua-mode
-         nyan-mode;; Nyan cat buffer scrollbar
-         etags-select
-         project-root
-         shell-pop;; Handy terminal access
-         auto-complete;; Auto completion
-         graphviz-dot-mode
-         sunrise-commander;; Midnight commander clone
-         smex;; M-x pimpifier
-         magit;; Git integration
-         goto-last-change;; Move pointer back to last change
-         js2-mode
-         redo+ ;; Better undo/redo handling
-         json-mode
-         guess-offset;; Guesses the tab width from current indentation
-         ;;gdb-mi
-         idomenu
-         escreen;;
-         ;; zencoding-mode
+       '(;; Customize which packages you want to install and activate
          ;; anything
          ;; anything-complete
          ;; anything-extension
          ;; anything-match-plugin
-         ;; ws-trim
          ;; ethan-wspace
+         ;; ws-trim
+         ;; zencoding-mode
          ;;company
+         ;;gdb-mi
+         ;;redo+ ;; Better undo/redo handling
+         ace-jump-mode;; Jump quickly to a word or character
+         auto-complete;; Auto completion
+         buffer-move;; Move buffers around
+         el-get
+         escreen;;
+         etags-select
+         google-maps
+         goto-last-change;; Move pointer back to last change
+         graphviz-dot-mode
+         guess-offset;; Guesses the tab width from current indentation
+         highlight-indentation;; Visual indicator for current indentation block
+         idomenu
+         jedi;; Python auto-completion.
+         js2-mode
+         json-mode
+         lua-mode
+         magit;; Git integration
+         monky
+         nyan-mode;; Nyan cat buffer scrollbar
+         project-root
+         qml-mode;;
+         shell-pop;; Handy terminal access
+         slime
+         smart-compile+;; M-x compile replacement. Determines default compile command from filename.
+         smex;; M-x pimpifier
+         sunrise-commander;; Midnight commander clone
+         vkill;; Kill processes from emacs
+         yasnippet
+         yasobjc
          )
        (mapcar 'el-get-source-name el-get-sources))
       )
 
 (el-get 'sync my-packages)
-
-;;(el-get-user-package-directory

@@ -1,7 +1,7 @@
 (progn
   (let* ((snippetdir (concat
-		      (car yas/root-directory)
-		      "/text-mode/cc-mode/objc-mode/")))
+                      (car yas/root-directory)
+                      "/objc-mode/")))
     (message (concat "mkdir -p " snippetdir))
     (shell-command (concat "mkdir -p " snippetdir))
     (shell-command
@@ -14,4 +14,3 @@
       ))
     )
   )
-

@@ -1,10 +1,13 @@
-;; Required variables!
+ ;; The path to my configuration folder differs on different computers
+
 (if (file-exists-p "/Users/greget/konfig")
     (setq konfig-home "/Users/greget/konfig/")
   )
 (if (file-exists-p "/Users/pgregersson/konfig")
      (setq konfig-home "/Users/pgregersson/konfig/")
      )
+
+;; Add the configuration folder to the load path for el files.
 (setq load-path (cons konfig-home load-path))
 
 ;;; A quick & ugly PATH solution to Emacs on Mac OSX
@@ -73,6 +76,11 @@
 
 ;; Use y-n instead of yes-no
 (fset 'yes-or-no-p 'y-or-n-p)
+
+;; Ask for confirmation before quitting Emacs
+(add-hook 'kill-emacs-query-functions
+          (lambda () (y-or-n-p "Do you really want to exit Emacs? "))
+          'append)
 
 ;; Suppress GNU startup message
 (setq inhibit-startup-message t)
