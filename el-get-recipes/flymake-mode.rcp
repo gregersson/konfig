@@ -1,0 +1,5 @@
+(:name flymake-mode
+       :type github
+       :url "https://github.com/illusori/emacs-flymake.git"
+       )
+

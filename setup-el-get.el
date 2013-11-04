@@ -30,9 +30,11 @@
          ;; anything-extension
          ;; anything-match-plugin
          ;; ethan-wspace
+         ;; slime
          ;; ws-trim
          ;; zencoding-mode
          ;;company
+         ;;etags-select
          ;;gdb-mi
          ;;redo+ ;; Better undo/redo handling
          ace-jump-mode;; Jump quickly to a word or character
@@ -40,15 +42,16 @@
          buffer-move;; Move buffers around
          el-get
          escreen;;
-         etags-select
          google-maps
          goto-last-change;; Move pointer back to last change
          graphviz-dot-mode
          guess-offset;; Guesses the tab width from current indentation
          highlight-indentation;; Visual indicator for current indentation block
          idomenu
-         jedi;; Python auto-completion.
+         ;;jedi;; Python auto-completion.
          js2-mode
+         flymake-mode
+         flymake-json
          json-mode
          lua-mode
          magit;; Git integration
@@ -57,7 +60,6 @@
          project-root
          qml-mode;;
          shell-pop;; Handy terminal access
-         slime
          smart-compile+;; M-x compile replacement. Determines default compile command from filename.
          smex;; M-x pimpifier
          sunrise-commander;; Midnight commander clone

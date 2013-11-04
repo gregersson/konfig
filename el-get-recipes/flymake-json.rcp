@@ -1,0 +1,5 @@
+(:name flymake-json
+       :type github
+       :url "https://github.com/purcell/flymake-json.git"
+       :depends (flymake-mode json-mode)
+       )

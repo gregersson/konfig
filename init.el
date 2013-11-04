@@ -308,6 +308,21 @@ With argument, do this that many times."
 (global-set-key  [C-M-up] 'ff-find-other-file)
 (global-set-key  [C-M-down] 'ff-find-other-file)
 
+
+;; Initialize slime-helper from quicklisp
+(load (expand-file-name "~/src/quicklisp/slime-helper.el"))
+
+(setq inferior-lisp-program "sbcl")
+
+
+;; Eclipse pain-points
+;; cmd-q immediately quits eclipse
+;; No way to stop the process you just started (logging hogs computer cpu)
+;;
+
+
+
+
 ;;--------------
 ;; todos:
 ;; fix fuzzy matching for ac-complete, other stuff too?

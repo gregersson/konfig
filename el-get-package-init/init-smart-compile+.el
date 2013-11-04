@@ -1,0 +1,16 @@
+(progn
+  (require 'smart-compile+)
+  (defvar smart-compile-alist
+    '(("\\.c$"          . "gcc -O2 %f -lm -o %n")
+      ("\\.[Cc]+[Pp]*$" . "g++ -O2 %f -lm -o %n")
+      ("\\.java$"       . "javac %f")
+      ("\\.f90$"        . "f90 %f -o %n")
+      ("\\.[Ff]$"       . "f77 %f -o %n")
+      ("\\.pl$"         . "perl -cw %f")
+      ("\\.mp$"         . "mptopdf %f")
+      ("\\.php$"        . "php %f")
+      ("\\.tex$"        . "latex %f")
+      ("\\.texi$"       . "makeinfo %f")
+      ("\\.py$"         . "python %f")
+      (emacs-lisp-mode  . (emacs-lisp-byte-compile))))
+  )

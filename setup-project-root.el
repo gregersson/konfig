@@ -1,5 +1,13 @@
 (setq project-roots
       '(
+	("Torped"
+         :root-contains-files ("torped.js")
+         ;; :filename-regex ,(regexify-ext-list '(js html))
+         ;; :exclude-paths ("*.app"))
+         :on-hit (lambda (p) 
+                   (setq project-root-find-files-command "find . -iname \"*.js\"")
+		   )
+	 )
 	("TAD"
          :root-contains-files ("build/generate_ninja_makefile.sh")
          ;; :filename-regex ,(regexify-ext-list '(h c cpp qml))
