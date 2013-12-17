@@ -20,7 +20,7 @@
 ;; -- end of Required variables
 
 ;; Required goodies for some kd/kdext-stuffz
-(require 'thingatpt)
+;;(require 'thingatpt)
 
 ;; Load el-get packages
 (load-library "setup-el-get.el")
@@ -28,23 +28,23 @@
 ;; Setup project-root paths and rules
 (load-library "setup-project-root.el")
 
-;; Clone kd-repos if needed
-(if  (file-exists-p (concat konfig-home "kd-repos"))
-    (progn
-      ;; The following will be done if the kd-repos are present
+;; ;; Clone kd-repos if needed
+;; (if  (file-exists-p (concat konfig-home "kd-repos"))
+;;     (progn
+;;       ;; The following will be done if the kd-repos are present
 
-      ;; Avoid ugly tmp-files
-      (load-library "kd-repos/kdext/kdext-autosave-settings.el")
-      ;; Helpers to insert braces
-      (load-library "kd-repos/kdext/kdext-insertion-functions.el")
-      )
-  (progn
-    ;; There are no kd-repos, clone them!
-    (dired-create-directory (concat konfig-home "kd-repos"))
-    (call-process "hg" nil "messages" nil "clone" "https://bitbucket.org/dnils/kd" (concat konfig-home "kd-repos/kd"))
-    (call-process "hg" nil "messages" nil "clone" "https://bitbucket.org/dnils/kdext" (concat konfig-home "kd-repos/kdext"))
-    )
-  )
+;;       ;; Avoid ugly tmp-files
+;;       (load-library "kd-repos/kdext/kdext-autosave-settings.el")
+;;       ;; Helpers to insert braces
+;;       (load-library "kd-repos/kdext/kdext-insertion-functions.el")
+;;       )
+;;   (progn
+;;     ;; There are no kd-repos, clone them!
+;;     (dired-create-directory (concat konfig-home "kd-repos"))
+;;     (call-process "hg" nil "messages" nil "clone" "https://bitbucket.org/dnils/kd" (concat konfig-home "kd-repos/kd"))
+;;     (call-process "hg" nil "messages" nil "clone" "https://bitbucket.org/dnils/kdext" (concat konfig-home "kd-repos/kdext"))
+;;     )
+;;   )
 
 ;; IDO!
 (ido-mode t)
@@ -183,7 +183,11 @@
 
 
 (require 'whitespace)
-(setq whitespace-style '(face empty tabs lines-tail trailing))
+(setq whitespace-style '(face
+                         empty
+                         tabs
+                         ;; lines-tail
+                         trailing))
 (global-whitespace-mode t)
 
 (setq tags-table-list
@@ -310,7 +314,7 @@ With argument, do this that many times."
 
 
 ;; Initialize slime-helper from quicklisp
-(load (expand-file-name "~/src/quicklisp/slime-helper.el"))
+;; (load (expand-file-name "~/src/quicklisp/slime-helper.el"))
 
 (setq inferior-lisp-program "sbcl")
 
@@ -319,9 +323,6 @@ With argument, do this that many times."
 ;; cmd-q immediately quits eclipse
 ;; No way to stop the process you just started (logging hogs computer cpu)
 ;;
-
-
-
 
 ;;--------------
 ;; todos:
@@ -339,3 +340,16 @@ With argument, do this that many times."
 ;; linenumbers, percent, gutter summary?
 ;; qml-mode
 ;; popup-shell in folder of file.
+;; projectile istället för project-root
+;; expand-region för att utöka selection! och även pending deletion..
+;; iedit
+;; Fixa mark-multiple! http://bbbscarter.wordpress.com/category/coding/emacs/
+;; 
+
+(defun autorefresh-chrome-hook()
+  (interactive)
+  (shell-command
+   "osascript ~/konfig/autorefresh.scpt"))
+(add-hook 'javascript-mode-hook
+          (lambda () 
+            (add-hook 'after-save-hook 'autorefresh-chrome-hook nil 'make-it-local)))

@@ -1,11 +1,3 @@
 tell application "Google Chrome"
-	activate
-	tell application "System Events"
-		tell process "Google Chrome"
-			keystroke "r" using {command down, shift down}
-		end tell
-	end tell
-end tell
-tell application "Emacs"
-	activate
+        reload active tab of window 1
 end tell

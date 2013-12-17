@@ -1,0 +1,5 @@
+(:name ac-js2
+       :type github
+       :url "https://github.com/neutrico/ac-js2"
+       :depends (skewer-mode js2-mode)
+       )

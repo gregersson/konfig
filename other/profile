@@ -7,7 +7,7 @@ export PATH=/usr/local/sbin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:$PATH
 #export DYLD_LIBRARY_PATH="$MAGICK_HOME/lib/:$DYLD_LIBRARY_PATH"
 
 alias less='less -R'
-alias emacs='emacsclient -n -c'
+# alias emacs='emacsclient -n -c'
 if [ -f `brew --prefix`/etc/bash_completion ]; then
  . `brew --prefix`/etc/bash_completion
 fi

@@ -1,3 +1,4 @@
+(add-hook 'find-file-hook 'flymake-find-file-hook)
 (progn
   (when (load "flymake" t)
     (defun flymake-pylint-init ()
