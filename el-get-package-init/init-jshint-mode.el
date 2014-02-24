@@ -2,6 +2,10 @@
 ;; (add-hook 'javascript-mode-hook
 ;;      (lambda () (flymake-mode t)))
 
+;; (defcustom jshint-mode-mode "jslint"
+;;   " Can be either jshint or jslint"
+;;   :type 'string
+;;   :group 'flymake-jshint)
 (defun my-flymake-show-next-error()
   (interactive)
   (flymake-goto-next-error)

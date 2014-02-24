@@ -37,9 +37,11 @@
          ;;gdb-mi
          ;;jedi;; Python auto-completion.
          ace-jump-mode;; Jump quickly to a word or character
+         ack-and-a-half
          auto-complete;; Auto completion
          autopair
          buffer-move;; Move buffers around
+         color-theme
          el-get
          escreen;;
          expand-region
@@ -58,6 +60,7 @@
          json-mode
          lua-mode
          magit;; Git integration
+         multiple-cursors
          monky
          nyan-mode;; Nyan cat buffer scrollbar
          project-root

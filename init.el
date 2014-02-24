@@ -318,6 +318,22 @@ With argument, do this that many times."
 
 (setq inferior-lisp-program "sbcl")
 
+;; Backup files handling
+(defvar --backup-directory (concat user-emacs-directory "backups"))
+(if (not (file-exists-p --backup-directory))
+        (make-directory --backup-directory t))
+(setq backup-directory-alist `(("." . ,--backup-directory)))
+(setq make-backup-files t               ; backup of a file the first time it is saved.
+      backup-by-copying t               ; don't clobber symlinks
+      version-control t                 ; version numbers for backup files
+      delete-old-versions t             ; delete excess backup files silently
+      delete-by-moving-to-trash t
+      kept-old-versions 6               ; oldest versions to keep when a new numbered backup is made (default: 2)
+      kept-new-versions 9               ; newest versions to keep when a new numbered backup is made (default: 2)
+      auto-save-default t               ; auto-save every buffer that visits a file
+      auto-save-timeout 20              ; number of seconds idle time before auto-save (default: 30)
+      auto-save-interval 200            ; number of keystrokes between auto-saves (default: 300)
+      )
 
 ;; Eclipse pain-points
 ;; cmd-q immediately quits eclipse
@@ -338,13 +354,10 @@ With argument, do this that many times."
 ;; minibuffer completions
 ;; path to file in bottom of buffer
 ;; linenumbers, percent, gutter summary?
-;; qml-mode
 ;; popup-shell in folder of file.
 ;; projectile istället för project-root
-;; expand-region för att utöka selection! och även pending deletion..
-;; iedit
-;; Fixa mark-multiple! http://bbbscarter.wordpress.com/category/coding/emacs/
-;; 
+;; See http://anirudhsasikumar.net/blog/2005.01.21.html for handling sensitive files
+
 
 (defun autorefresh-chrome-hook()
   (interactive)
@@ -353,3 +366,12 @@ With argument, do this that many times."
 (add-hook 'javascript-mode-hook
           (lambda () 
             (add-hook 'after-save-hook 'autorefresh-chrome-hook nil 'make-it-local)))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Inconsolata" :foundry "nil" :slant normal :weight normal :height 181 :width normal)))))
+
+
