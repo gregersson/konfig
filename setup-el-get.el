@@ -24,7 +24,9 @@
 
 (setq my-packages
       (append
-       '(;; Customize which packages you want to install and activate
+       ;; Customize which packages you want to install and activate
+       '(
+         ;; anything
          ;; anything-complete
          ;; anything-extension
          ;; anything-match-plugin
@@ -42,17 +44,21 @@
          autopair
          buffer-move;; Move buffers around
          color-theme
+         diff-hl
          el-get
+         emacs-w3m
          escreen;;
          expand-region
          flymake
          flymake-cursor
          flymake-json
          flymake-mode
+         ;; git-gutter-fringe
          google-maps
          goto-last-change;; Move pointer back to last change
          graphviz-dot-mode
          guess-offset;; Guesses the tab width from current indentation
+         ;; helm
          highlight-indentation;; Visual indicator for current indentation block
          idomenu
          js2-mode
@@ -60,8 +66,8 @@
          json-mode
          lua-mode
          magit;; Git integration
-         multiple-cursors
          monky
+         multiple-cursors
          nyan-mode;; Nyan cat buffer scrollbar
          project-root
          qml-mode;;
@@ -71,9 +77,10 @@
          smex;; M-x pimpifier
          sunrise-commander;; Midnight commander clone
          vkill;; Kill processes from emacs
+         ws-butler
          yasnippet
          yasobjc
-;; anything
+
          )
        (mapcar 'el-get-source-name el-get-sources))
       )

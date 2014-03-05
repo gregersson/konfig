@@ -1,0 +1,4 @@
+(:name diff-hl
+       :type github
+       :url "https://github.com/dgutov/diff-hl"
+       )

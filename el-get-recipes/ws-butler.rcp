@@ -1,0 +1,4 @@
+(:name ws-butler
+       :type github
+       :url "https://github.com/lewang/ws-butler"
+       )

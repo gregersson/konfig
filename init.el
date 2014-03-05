@@ -335,6 +335,12 @@ With argument, do this that many times."
       auto-save-interval 200            ; number of keystrokes between auto-saves (default: 300)
       )
 
+;; (electric-layout-mode 1)
+(electric-indent-mode 1)
+(electric-pair-mode 1)
+
+(subword-mode 1)
+
 ;; Eclipse pain-points
 ;; cmd-q immediately quits eclipse
 ;; No way to stop the process you just started (logging hogs computer cpu)
@@ -343,7 +349,6 @@ With argument, do this that many times."
 ;;--------------
 ;; todos:
 ;; fix fuzzy matching for ac-complete, other stuff too?
-;; {} electric pairing
 ;; whitespace-mode?
 ;; show-paren-mode?
 ;; semantic ac-complete?  gtags?
@@ -357,7 +362,9 @@ With argument, do this that many times."
 ;; popup-shell in folder of file.
 ;; projectile istället för project-root
 ;; See http://anirudhsasikumar.net/blog/2005.01.21.html for handling sensitive files
-
+;; helm and helm-swoop?
+;; key-chord.el!
+;; whitespace hungry deletion
 
 (defun autorefresh-chrome-hook()
   (interactive)
@@ -375,3 +382,14 @@ With argument, do this that many times."
  '(default ((t (:family "Inconsolata" :foundry "nil" :slant normal :weight normal :height 181 :width normal)))))
 
 
+;; Lisp specific defuns
+
+(defun eval-and-replace ()
+  "Replace the preceding sexp with its value."
+  (interactive)
+  (backward-kill-sexp)
+  (condition-case nil
+      (prin1 (eval (read (current-kill 0)))
+             (current-buffer))
+    (error (message "Invalid expression")
+           (insert (current-kill 0)))))

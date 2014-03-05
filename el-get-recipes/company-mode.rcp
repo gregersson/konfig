@@ -1,0 +1,4 @@
+(:name company-mode
+       :type github
+       :url "https://github.com/company-mode/company-mode"
+       )
