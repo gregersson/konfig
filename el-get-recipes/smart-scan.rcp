@@ -1,0 +1,4 @@
+(:name smart-scan
+       :type github
+       :url "https://github.com/mickeynp/smart-scan"
+       )

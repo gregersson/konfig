@@ -1,11 +1,6 @@
- ;; The path to my configuration folder differs on different computers
-
 (if (file-exists-p "/Users/greget/konfig")
     (setq konfig-home "/Users/greget/konfig/")
   )
-(if (file-exists-p "/Users/pgregersson/konfig")
-     (setq konfig-home "/Users/pgregersson/konfig/")
-     )
 
 ;; Add the configuration folder to the load path for el files.
 (setq load-path (cons konfig-home load-path))
@@ -76,11 +71,6 @@
 
 ;; Use y-n instead of yes-no
 (fset 'yes-or-no-p 'y-or-n-p)
-
-;; Ask for confirmation before quitting Emacs
-(add-hook 'kill-emacs-query-functions
-          (lambda () (y-or-n-p "Do you really want to exit Emacs? "))
-          'append)
 
 ;; Suppress GNU startup message
 (setq inhibit-startup-message t)
@@ -199,6 +189,7 @@
 ;; nuke whitespaces when writing to a file
 ;; (add-hook 'before-save-hook 'whitespace-cleanup)
 
+(load-library "torped.el")
 
 (defun uniq-lines (beg end)
   "Unique lines in region.
@@ -341,31 +332,6 @@ With argument, do this that many times."
 
 (subword-mode 1)
 
-;; Eclipse pain-points
-;; cmd-q immediately quits eclipse
-;; No way to stop the process you just started (logging hogs computer cpu)
-;;
-
-;;--------------
-;; todos:
-;; fix fuzzy matching for ac-complete, other stuff too?
-;; whitespace-mode?
-;; show-paren-mode?
-;; semantic ac-complete?  gtags?
-;; if !yasnippet, mark placeholder text
-;; qrr alias etc.
-;; q_property yasnippet eller liknande.
-;; tramp-mode
-;; minibuffer completions
-;; path to file in bottom of buffer
-;; linenumbers, percent, gutter summary?
-;; popup-shell in folder of file.
-;; projectile istället för project-root
-;; See http://anirudhsasikumar.net/blog/2005.01.21.html for handling sensitive files
-;; helm and helm-swoop?
-;; key-chord.el!
-;; whitespace hungry deletion
-
 (defun autorefresh-chrome-hook()
   (interactive)
   (shell-command
@@ -393,3 +359,65 @@ With argument, do this that many times."
              (current-buffer))
     (error (message "Invalid expression")
            (insert (current-kill 0)))))
+
+(defun activate-desktop ()
+  (progn
+    (setq desktop-dirname             "~/.emacs.d/"
+          desktop-base-file-name      "emacs.desktop"
+          desktop-base-lock-name      "emacs.desktop.lock"
+          desktop-path                (list desktop-dirname)
+          desktop-save                t
+          desktop-files-not-to-save   "^$" ;reload tramp paths
+          desktop-load-locked-desktop nil)
+    (desktop-save-mode 1)
+    )
+  )
+(if (eq window-system 'mac)
+    (activate-desktop)
+    )
+
+
+;; Eclipse pain-points
+;; cmd-q immediately quits eclipse
+;; No way to stop the process you just started (logging hogs computer cpu)
+;;
+
+;;--------------
+;; todos:
+;; fix fuzzy matching for ac-complete, other stuff too?
+;; whitespace-mode?
+;; show-paren-mode?
+;; semantic ac-complete?  gtags?
+;; if !yasnippet, mark placeholder text
+;; qrr alias etc.
+;; q_property yasnippet eller liknande.
+;; tramp-mode
+;; minibuffer completions
+;; path to file in bottom of buffer
+;; linenumbers, percent, gutter summary?
+;; popup-shell in folder of file.
+;; projectile istället för project-root
+;; See http://anirudhsasikumar.net/blog/2005.01.21.html for handling sensitive files
+;; helm and helm-swoop?
+;; key-chord.el!
+;; whitespace hungry deletion
+;; visible-mark / bookmarks
+;; eww
+;; smart-scan
+;; deft
+;; builtin keys...
+;; return act as control_r?
+;; super key? option on osx..
+;; fix modifier keys in terminal mode!
+;; image sizes for images! maybe in dired?
+;; ace-jump all visible buffers
+;; img-linkify
+;; tern-mode! http://ternjs.net/doc/manual.html#emacs
+;; emacs 24.4
+;; swank-js! checkout emacs-rocks
+;; ack default folder...
+;; fancy-narrow might be useful..
+;; a clever which-func-mode would be nice, breadcrumbs? 
+;; handy functions from github
+;; (setq header-line-format mode-line-format)
+;; smarttabs

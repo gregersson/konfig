@@ -51,8 +51,9 @@
          expand-region
          flymake
          flymake-cursor
-         flymake-json
+         ;;flymake-json
          flymake-mode
+         fm
          ;; git-gutter-fringe
          google-maps
          goto-last-change;; Move pointer back to last change
@@ -60,27 +61,28 @@
          guess-offset;; Guesses the tab width from current indentation
          ;; helm
          highlight-indentation;; Visual indicator for current indentation block
+         ;; idle-highlight-mode
          idomenu
          js2-mode
+         js2-refactor
          jshint-mode
-         json-mode
+         ;;json-mode
          lua-mode
          magit;; Git integration
          monky
          multiple-cursors
          nyan-mode;; Nyan cat buffer scrollbar
          project-root
-         qml-mode;;
-         redo+ ;; Better undo/redo handling
-         shell-pop;; Handy terminal access
+         undo-tree ;; Better undo/redo handling
          smart-compile+;; M-x compile replacement. Determines default compile command from filename.
+         smart-scan
          smex;; M-x pimpifier
          sunrise-commander;; Midnight commander clone
+         tern ;; Javascript magic
          vkill;; Kill processes from emacs
          ws-butler
          yasnippet
          yasobjc
-
          )
        (mapcar 'el-get-source-name el-get-sources))
       )

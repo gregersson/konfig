@@ -1,0 +1,5 @@
+(:name fm
+       :type http
+       :module "fm"
+       :url "http://www.damtp.cam.ac.uk/user/sje30/emacs/fm.el"
+       )

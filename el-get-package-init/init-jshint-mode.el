@@ -12,10 +12,11 @@
   (flymake-display-err-menu-for-current-line)
   )
 
-(global-set-key "\356" (lambda ()
+;; S-M-n or M-N if you will
+(global-set-key "\316" (lambda ()
                          (interactive)
                          (flymake-goto-next-error)))
-
-(global-set-key "\360" (lambda ()
+;; S-M-p or M-P if you will
+(global-set-key "\320" (lambda ()
                          (interactive)
                          (flymake-goto-prev-error)))
