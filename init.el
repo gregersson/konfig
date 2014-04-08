@@ -43,7 +43,9 @@
 
 ;; IDO!
 (ido-mode t)
-
+(global-set-key  (kbd "C-z") '(lambda()
+                                (interactive)
+                                ))
 (global-set-key  (kbd "<f6>") 'bury-buffer)
 (global-set-key  (kbd "S-<f6>") '(lambda()
                                    (interactive)
@@ -339,6 +341,9 @@ With argument, do this that many times."
 (add-hook 'javascript-mode-hook
           (lambda () 
             (add-hook 'after-save-hook 'autorefresh-chrome-hook nil 'make-it-local)))
+(add-hook 'js2-mode-hook
+          (lambda () 
+            (add-hook 'after-save-hook 'autorefresh-chrome-hook nil 'make-it-local)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -412,8 +417,7 @@ With argument, do this that many times."
 ;; image sizes for images! maybe in dired?
 ;; ace-jump all visible buffers
 ;; img-linkify
-;; tern-mode! http://ternjs.net/doc/manual.html#emacs
-;; emacs 24.4
+;; emacs-mac 24.4
 ;; swank-js! checkout emacs-rocks
 ;; ack default folder...
 ;; fancy-narrow might be useful..
@@ -421,3 +425,4 @@ With argument, do this that many times."
 ;; handy functions from github
 ;; (setq header-line-format mode-line-format)
 ;; smarttabs
+;; doremi

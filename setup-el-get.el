@@ -73,6 +73,7 @@
          multiple-cursors
          nyan-mode;; Nyan cat buffer scrollbar
          project-root
+         rainbow-mode
          undo-tree ;; Better undo/redo handling
          smart-compile+;; M-x compile replacement. Determines default compile command from filename.
          smart-scan

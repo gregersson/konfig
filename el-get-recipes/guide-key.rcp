@@ -1,0 +1,4 @@
+(:name guide-key
+       :type github
+       :pkgname "kbkbkbkb1/guide-key"
+       :depends (popwin))
