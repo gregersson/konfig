@@ -17,6 +17,10 @@
 ;; Required goodies for some kd/kdext-stuffz
 ;;(require 'thingatpt)
 
+;;(require 'package)
+;;(add-to-list 'package-archives
+;;             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
 ;; Load el-get packages
 (load-library "setup-el-get.el")
 
@@ -281,8 +285,17 @@ With argument, do this that many times."
 With argument, do this that many times."
   (interactive "p")
   (delete-word (- arg)))
-(global-set-key [backspace] (quote backward-delete-word))
-(global-set-key (kbd "DEL") (quote backward-delete-word))
+
+(defun backward-delete-if-word (arg)
+  (interactive "p")
+  (if (thing-at-point 'word)
+      (backward-delete-word arg)
+    (delete-backward-char arg)
+      )
+  )
+
+(global-set-key [backspace] (quote backward-delete-if-word))
+(global-set-key (kbd "DEL") (quote backward-delete-if-word))
 
 ;; Major modes
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
@@ -426,3 +439,22 @@ With argument, do this that many times."
 ;; (setq header-line-format mode-line-format)
 ;; smarttabs
 ;; doremi
+;; remove whitespace before colon, color : "#ff0000" -> color: "#ff0000", code style enforcement?
+;; elpy for python development
+
+(defun calculate-expression-and-replace (start end)
+  (interactive "r")
+  (let ((text (buffer-substring-no-properties start end)))
+    (kill-region start end)
+    (insert (calc-eval text))
+    )
+  )
+
+(color-theme-initialize)
+(color-theme-rotor)
+(set-face-attribute 'highlight nil :foreground 'unspecified)
+(set-face-attribute 'highlight nil :background 'unspecified)
+(set-face-foreground 'highlight nil)
+(set-face-underline-p 'highlight t)
+(set-face-attribute hl-line-face nil :underline t)
+

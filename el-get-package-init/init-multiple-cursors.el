@@ -2,4 +2,7 @@
 (global-set-key (kbd "C-S-n") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-S-p") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-ö") 'mc/mark-all-like-this)
+(if (not (boundp 'mc--default-cmds-to-run-for-all))
+    (setq mc--default-cmds-to-run-for-all '())
+    )
 (add-to-list 'mc--default-cmds-to-run-for-all 'eval-and-replace)

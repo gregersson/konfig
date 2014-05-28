@@ -19,7 +19,6 @@
       '(
         (:name magit
                :after (global-set-key (kbd "C-x C-z") 'magit-status))
-
         ))
 
 (setq my-packages
@@ -44,7 +43,8 @@
          autopair
          buffer-move;; Move buffers around
          color-theme
-         diff-hl
+         ;;diff-hl
+         eclim
          el-get
          emacs-w3m
          escreen;;
@@ -59,6 +59,7 @@
          goto-last-change;; Move pointer back to last change
          graphviz-dot-mode
          guess-offset;; Guesses the tab width from current indentation
+         guide-key
          ;; helm
          highlight-indentation;; Visual indicator for current indentation block
          ;; idle-highlight-mode
@@ -72,13 +73,14 @@
          monky
          multiple-cursors
          nyan-mode;; Nyan cat buffer scrollbar
+         popwin
          project-root
          rainbow-mode
          undo-tree ;; Better undo/redo handling
          smart-compile+;; M-x compile replacement. Determines default compile command from filename.
          smart-scan
          smex;; M-x pimpifier
-         sunrise-commander;; Midnight commander clone
+         ;;sunrise-commander;; Midnight commander clone
          tern ;; Javascript magic
          vkill;; Kill processes from emacs
          ws-butler

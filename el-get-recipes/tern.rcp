@@ -3,5 +3,6 @@
        :type github
        :depends (auto-complete)
        :pkgname "marijnh/tern"
-       :build (("npm install"))
-       :path ("emacs"))
+       :load-path ("emacs")
+       :build (("npm" "install"))
+       )

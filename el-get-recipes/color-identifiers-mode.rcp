@@ -1,0 +1,5 @@
+(:name color-identifiers-mode
+       :type github
+       :url "https://github.com/ankurdave/color-identifiers-mode"
+       :depends
+       )
