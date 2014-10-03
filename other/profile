@@ -2,7 +2,7 @@
 # MacPorts Installer addition on 2011-02-08_at_14:29:19: adding an appropriate PATH variable for use with MacPorts.
 #export PATH=$MAGICK_HOME/bin:/usr/local/share/python:/usr/local/sbin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:$PATH
 
-export PATH=/usr/local/sbin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:$PATH
+export PATH=/usr/local/sbin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:/Users/greget/src/depot_tools:$PATH
 # Finished adapting your PATH environment variable for use with MacPorts.
 #export DYLD_LIBRARY_PATH="$MAGICK_HOME/lib/:$DYLD_LIBRARY_PATH"
 
@@ -22,3 +22,5 @@ fi
 source ~/.bash_colors
 
 export LUA_PATH="$LUA_PATH;/Users/greget/src/lualint/?.lua"
+export JPY=/Users/greget/src/scratch/j2/j.py
+. /Users/greget/src/scratch/j2/j.sh

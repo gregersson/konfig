@@ -41,7 +41,7 @@
          ack-and-a-half
          auto-complete;; Auto completion
          autopair
-         buffer-move;; Move buffers around
+         ;;buffer-move;; Move buffers around
          color-theme
          ;;diff-hl
          eclim
@@ -55,7 +55,7 @@
          flymake-mode
          fm
          ;; git-gutter-fringe
-         google-maps
+         ;;google-maps
          goto-last-change;; Move pointer back to last change
          graphviz-dot-mode
          guess-offset;; Guesses the tab width from current indentation
@@ -73,6 +73,7 @@
          monky
          multiple-cursors
          nyan-mode;; Nyan cat buffer scrollbar
+         ;; org-mode
          popwin
          project-root
          rainbow-mode

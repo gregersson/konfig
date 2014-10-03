@@ -296,7 +296,7 @@ With argument, do this that many times."
 
 (global-set-key [backspace] (quote backward-delete-if-word))
 (global-set-key (kbd "DEL") (quote backward-delete-if-word))
-
+(global-set-key [C-backspace] (quote backward-delete-char))
 ;; Major modes
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 
@@ -458,3 +458,35 @@ With argument, do this that many times."
 (set-face-underline-p 'highlight t)
 (set-face-attribute hl-line-face nil :underline t)
 
+(defun align-regexp-repeated (start stop regexp)
+  "Like align-regexp, but repeated for multiple columns. See
+http://www.emacswiki.org/emacs/AlignCommands"
+  (interactive "r\nsAlign regexp: ")
+  (let ((spacing 1)
+        (old-buffer-size (buffer-size)))
+    ;; If our align regexp is just spaces, then we don't need any
+    ;; extra spacing.
+    (when (string-match regexp " ")
+      (setq spacing 0))
+    (align-regexp start stop
+                  ;; add space at beginning of regexp
+                  (concat "\\([[:space:]]*\\)" regexp)
+                  1 spacing t)
+    ;; modify stop because align-regexp will add/remove characters
+    (align-regexp start (+ stop (- (buffer-size) old-buffer-size))
+                  ;; add space at end of regexp
+                  (concat regexp "\\([[:space:]]*\\)")
+                  1 spacing t)))
+
+(defun local-set-minor-mode-key (mode key def)
+  "Overrides a minor mode keybinding for the local
+   buffer, by creating or altering keymaps stored in buffer-local
+   `minor-mode-overriding-map-alist'."
+  (let* ((oldmap (cdr (assoc mode minor-mode-map-alist)))
+         (newmap (or (cdr (assoc mode minor-mode-overriding-map-alist))
+                     (let ((map (make-sparse-keymap)))
+                       (set-keymap-parent map oldmap)
+                       (push `(,mode . ,map) minor-mode-overriding-map-alist) 
+                       map))))
+    (define-key newmap key def)))
+(global-set-key "\M-/" 'hippie-expand)
