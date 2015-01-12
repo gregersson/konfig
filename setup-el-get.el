@@ -87,6 +87,7 @@
          ws-butler
          yasnippet
          yasobjc
+         string-edit
          )
        (mapcar 'el-get-source-name el-get-sources))
       )

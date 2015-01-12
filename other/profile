@@ -22,5 +22,8 @@ fi
 source ~/.bash_colors
 
 export LUA_PATH="$LUA_PATH;/Users/greget/src/lualint/?.lua"
-export JPY=/Users/greget/src/scratch/j2/j.py
-. /Users/greget/src/scratch/j2/j.sh
+. `brew --prefix`/etc/profile.d/z.sh
+
+export GEM_HOME='/usr/local/Cellar/gems/1.8'
+
+export PATH="$PATH:$GEM_HOME/bin"

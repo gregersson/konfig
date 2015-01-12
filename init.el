@@ -1,7 +1,7 @@
 (if (file-exists-p "/Users/greget/konfig")
     (setq konfig-home "/Users/greget/konfig/")
   )
-
+(setq ns-use-srgb-colorspace t)
 ;; Add the configuration folder to the load path for el files.
 (setq load-path (cons konfig-home load-path))
 
@@ -9,7 +9,13 @@
 (if (string-equal "darwin" (symbol-name system-type))
     (setenv "PATH" (concat "/usr/local/bin:/usr/local/sbin:" (getenv "PATH"))))
 
-;;
+;; key bindings for osx meta and alt keys
+(when (eq system-type 'darwin)
+  (setq mac-option-modifier 'none)
+  (setq mac-command-modifier 'meta)
+  (global-set-key [kp-delete] 'delete-char) ;; sets fn-delete to be right-delete
+  )
+
 (setenv "LUA_PATH" "/Users/greget/src/lualint/?.lua;")
 
 ;; -- end of Required variables
@@ -459,8 +465,7 @@ With argument, do this that many times."
 (set-face-attribute hl-line-face nil :underline t)
 
 (defun align-regexp-repeated (start stop regexp)
-  "Like align-regexp, but repeated for multiple columns. See
-http://www.emacswiki.org/emacs/AlignCommands"
+  "Like align-regexp, but repeated for multiple columns. See http://www.emacswiki.org/emacs/AlignCommands"
   (interactive "r\nsAlign regexp: ")
   (let ((spacing 1)
         (old-buffer-size (buffer-size)))
