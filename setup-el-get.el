@@ -38,11 +38,12 @@
          ;;gdb-mi
          ;;jedi;; Python auto-completion.
          ace-jump-mode;; Jump quickly to a word or character
-         ack-and-a-half
+         ;;ack-and-a-half
          auto-complete;; Auto completion
          autopair
          ;;buffer-move;; Move buffers around
          color-theme
+         cucumber
          ;;diff-hl
          eclim
          el-get
@@ -61,7 +62,7 @@
          guess-offset;; Guesses the tab width from current indentation
          guide-key
          ;; helm
-         highlight-indentation;; Visual indicator for current indentation block
+         ;;highlight-indentation;; Visual indicator for current indentation block
          ;; idle-highlight-mode
          idomenu
          js2-mode
@@ -79,6 +80,7 @@
          rainbow-mode
          undo-tree ;; Better undo/redo handling
          smart-compile+;; M-x compile replacement. Determines default compile command from filename.
+         smart-forward
          smart-scan
          smex;; M-x pimpifier
          ;;sunrise-commander;; Midnight commander clone
@@ -88,6 +90,9 @@
          yasnippet
          yasobjc
          string-edit
+         whitespace-cleanup-mode
+         ido-vertical-mode
+         flx-ido
          )
        (mapcar 'el-get-source-name el-get-sources))
       )

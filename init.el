@@ -7,7 +7,12 @@
 
 ;;; A quick & ugly PATH solution to Emacs on Mac OSX
 (if (string-equal "darwin" (symbol-name system-type))
-    (setenv "PATH" (concat "/usr/local/bin:/usr/local/sbin:" (getenv "PATH"))))
+    (progn
+      (setenv "PATH" (concat "/usr/local/bin:/usr/local/sbin:" (getenv "PATH")))
+      (setq exec-path (append exec-path '("/usr/local/bin")))
+      (setq exec-path (append exec-path '("/usr/local/sbin")))
+      )
+  )
 
 ;; key bindings for osx meta and alt keys
 (when (eq system-type 'darwin)
@@ -396,7 +401,7 @@ With argument, do this that many times."
     (desktop-save-mode 1)
     )
   )
-(if (eq window-system 'mac)
+(if (eq window-system 'ns)
     (activate-desktop)
     )
 
