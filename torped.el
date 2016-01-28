@@ -28,3 +28,33 @@ This function requires ImageMagick's “identify” shell command."
       (delete-region (car pathBoundaries) (+ (cdr pathBoundaries) 2))
       (insert myResult))
     ))
+
+(defun js2r--getfunargs (argPoint)
+  (save-excursion
+    (search-backward "function")
+    (setq funcString (thing-at-point 'line))
+    (setq splittedFuncString (s-split "[()]" funcString));; Split on parens
+    (cadr splittedFuncString);; Should contain the argument name!
+    ))
+
+;; Used to convert
+;;   var hello = "world";
+;; into
+;;   var hello = typeof params.hello !== 'undefined' ? params.hello : "world";
+(defun js2r-paramify ()
+  (interactive)
+  (let (argsObjectName varName defaultValue rowText)
+    (setq argsObjectName (js2r--getfunargs (point)))
+    (setq argsObjectName (if (string= "" argsObjectName)
+                             "params"
+                           argsObjectName))
+    (setq rowText (thing-at-point 'line))
+    (setq rowSplitOnEquals (s-split "=" rowText))
+    (setq varName (s-trim (car (cdr (s-split "var " (car rowSplitOnEquals))))))
+    (setq defaultValue (s-trim (car (s-split ";" (car (cdr rowSplitOnEquals))))))
+    (js2r--getfunargs (point))
+    (beginning-of-line)
+    (kill-line)
+    (insert (concat "var " varName " = typeof " argsObjectName "." varName " !== 'undefined' ? " argsObjectName "." varName " : " defaultValue ";"))
+    (js2-indent-line)
+    (js2-beginning-of-line)))

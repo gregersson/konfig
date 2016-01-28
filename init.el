@@ -8,7 +8,7 @@
 ;;; A quick & ugly PATH solution to Emacs on Mac OSX
 (if (string-equal "darwin" (symbol-name system-type))
     (progn
-      (setenv "PATH" (concat "/usr/local/bin:/usr/local/sbin:" (getenv "PATH")))
+      (setenv "PATH" (concat "/usr/local/bin:/usr/local/sbin:/usr/local/texlive/2014/bin/x86_64-darwin:" (getenv "PATH")))
       (setq exec-path (append exec-path '("/usr/local/bin")))
       (setq exec-path (append exec-path '("/usr/local/sbin")))
       )
@@ -375,7 +375,7 @@ With argument, do this that many times."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Inconsolata" :foundry "nil" :slant normal :weight normal :height 181 :width normal)))))
-
+(set-face-attribute 'default nil :height 120)
 
 ;; Lisp specific defuns
 
@@ -388,6 +388,9 @@ With argument, do this that many times."
              (current-buffer))
     (error (message "Invalid expression")
            (insert (current-kill 0)))))
+
+;; C-c C-e
+(global-set-key [3 5] 'eval-and-replace)
 
 (defun activate-desktop ()
   (progn
@@ -414,14 +417,11 @@ With argument, do this that many times."
 ;;--------------
 ;; todos:
 ;; fix fuzzy matching for ac-complete, other stuff too?
-;; whitespace-mode?
 ;; show-paren-mode?
 ;; semantic ac-complete?  gtags?
 ;; if !yasnippet, mark placeholder text
 ;; qrr alias etc.
-;; q_property yasnippet eller liknande.
 ;; tramp-mode
-;; minibuffer completions
 ;; path to file in bottom of buffer
 ;; linenumbers, percent, gutter summary?
 ;; popup-shell in folder of file.
@@ -452,6 +452,9 @@ With argument, do this that many times."
 ;; doremi
 ;; remove whitespace before colon, color : "#ff0000" -> color: "#ff0000", code style enforcement?
 ;; elpy for python development
+;; discover-mode!?=!? discover js2-refactor by nicolas petton
+;; indent-guide https://github.com/zk-phi/indent-guide
+;; phi-search https://github.com/zk-phi/phi-search
 
 (defun calculate-expression-and-replace (start end)
   (interactive "r")

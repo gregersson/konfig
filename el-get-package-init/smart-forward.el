@@ -1,0 +1,6 @@
+;; (global-set-key (kbd "C-M-p") 'smart-up)
+;; (global-set-key (kbd "C-M-n") 'smart-down)
+(global-set-key (kbd "C-M-p") 'smart-backward)
+(global-set-key (kbd "C-M-n") 'smart-forward)
+(global-set-key (kbd "C-M-b") 'smart-backward)
+(global-set-key (kbd "C-M-f") 'smart-forward)

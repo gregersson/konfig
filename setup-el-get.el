@@ -45,6 +45,8 @@
          color-theme
          cucumber
          ;;diff-hl
+         discover-js2-refactor
+         discover
          eclim
          el-get
          emacs-w3m
@@ -55,6 +57,7 @@
          ;;flymake-json
          flymake-mode
          fm
+         free-keys
          ;; git-gutter-fringe
          ;;google-maps
          goto-last-change;; Move pointer back to last change
@@ -70,7 +73,7 @@
          jshint-mode
          ;;json-mode
          lua-mode
-         magit;; Git integration
+         magitnext;; Git integration
          monky
          multiple-cursors
          nyan-mode;; Nyan cat buffer scrollbar
@@ -87,7 +90,7 @@
          tern ;; Javascript magic
          vkill;; Kill processes from emacs
          ws-butler
-         yasnippet
+         ;; yasnippet
          yasobjc
          string-edit
          whitespace-cleanup-mode
