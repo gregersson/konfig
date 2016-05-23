@@ -9,5 +9,7 @@
                           (file-name-directory buffer-file-name))))
         (list "epylint" (list local-file))))
     (add-to-list 'flymake-allowed-file-name-masks
-                 '("\\.py\\'" flymake-pylint-init)))
-  )
+                 '("\\.py\\'" flymake-pylint-init))
+    (defadvice flymake-display-warning (warning)
+      "Display a warning to the user, using minibuffer instead of annoying message-box"
+      (message warning))))

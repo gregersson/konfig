@@ -58,6 +58,11 @@
 
 ;; IDO!
 (ido-mode t)
+(defun ido-define-keys () ;; C-n/p is more intuitive in vertical layout
+  (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+  (define-key ido-completion-map (kbd "C-p") 'ido-prev-match))
+(add-hook 'ido-setup-hook 'ido-define-keys)
+
 (global-set-key  (kbd "C-z") '(lambda()
                                 (interactive)
                                 ))
@@ -400,10 +405,12 @@ With argument, do this that many times."
           desktop-path                (list desktop-dirname)
           desktop-save                t
           desktop-files-not-to-save   "^$" ;reload tramp paths
+;;          desktop-files-not-to-save "*magit" ;ignore magit files
           desktop-load-locked-desktop nil)
     (desktop-save-mode 1)
     )
   )
+
 (if (eq window-system 'ns)
     (activate-desktop)
     )
@@ -439,7 +446,7 @@ With argument, do this that many times."
 ;; super key? option on osx..
 ;; fix modifier keys in terminal mode!
 ;; image sizes for images! maybe in dired?
-;; ace-jump all visible buffers
+;; ace-jump all visible buffers / AVY!
 ;; img-linkify
 ;; emacs-mac 24.4
 ;; swank-js! checkout emacs-rocks
@@ -503,3 +510,21 @@ With argument, do this that many times."
                        map))))
     (define-key newmap key def)))
 (global-set-key "\M-/" 'hippie-expand)
+
+
+(defun my-find-file-check-if-large-file()
+  "If a file is over a given size, do specific stuff"
+  (when (> (buffer-size) (* 1024 1024))
+    (fundamental-mode)
+    (set (make-variable-buffer-local 'line-number-mode) nil) ;; Disable line numbers
+    (set (make-variable-buffer-local 'column-number-mode) nil);; Disable column numbers
+    (jit-lock-mode nil) ;; Disable clever font locking
+    (setq bidi-display-reordering nil) ;; Might speed up long line files
+    (flymake-mode nil)
+    (flyspell-mode nil)
+    (glasses-mode nil)
+    (font-lock-mode nil)
+    (highlight-changes-mode nil)
+    ))
+
+(add-hook 'find-file-hook 'my-find-file-check-if-large-file)

@@ -5,4 +5,5 @@
 (if (not (boundp 'mc--default-cmds-to-run-for-all))
     (setq mc--default-cmds-to-run-for-all '())
     )
+(setq mc/list-file (concat konfig-home "el-get-app-settings/.mc-lists.el"))
 (add-to-list 'mc--default-cmds-to-run-for-all 'eval-and-replace)

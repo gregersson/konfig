@@ -1,0 +1,15 @@
+(:name magitnext
+       :website "https://github.com/magit/magit#readme"
+       :description "It's Magit! An Emacs mode for Git."
+       :type github
+       :pkgname "magit/magit"
+       :branch "next"
+       :depends (dash)
+       ;;:info "."
+       ;; use the Makefile to produce the info manual, el-get can
+       ;; handle compilation and autoloads on its own.
+       ;;:compile "magit.*\.el\\'"
+       :build `(("make" "lisp"))
+       :build/berkeley-unix (("gmake" "lisp"))
+       ;; assume windows lacks make and makeinfo
+       :build/windows-nt (progn nil))

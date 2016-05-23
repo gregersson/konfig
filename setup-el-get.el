@@ -45,7 +45,7 @@
          color-theme
          cucumber
          ;;diff-hl
-         discover-js2-refactor
+         ;;discover-js2-refactor
          discover
          eclim
          el-get
@@ -73,7 +73,7 @@
          jshint-mode
          ;;json-mode
          lua-mode
-         magitnext;; Git integration
+         magit;; Git integration
          monky
          multiple-cursors
          nyan-mode;; Nyan cat buffer scrollbar
@@ -93,9 +93,9 @@
          ;; yasnippet
          yasobjc
          string-edit
-         whitespace-cleanup-mode
+         ;;whitespace-cleanup-mode
          ido-vertical-mode
-         flx-ido
+         ;;flx-ido
          )
        (mapcar 'el-get-source-name el-get-sources))
       )
