@@ -1,6 +1,9 @@
 (if (file-exists-p "/Users/greget/konfig")
     (setq konfig-home "/Users/greget/konfig/")
   )
+(if (file-exists-p "/Users/gregersson/konfig")
+    (setq konfig-home "/Users/gregersson/konfig/")
+  )
 (setq ns-use-srgb-colorspace t)
 ;; Add the configuration folder to the load path for el files.
 (setq load-path (cons konfig-home load-path))
@@ -10,6 +13,7 @@
     (progn
       (setenv "PATH" (concat "/usr/local/bin:/usr/local/sbin:/usr/local/texlive/2014/bin/x86_64-darwin:" (getenv "PATH")))
       (setq exec-path (append exec-path '("/usr/local/bin")))
+      (setq exec-path (append exec-path '("/Library/TeX/texbin/")))
       (setq exec-path (append exec-path '("/usr/local/sbin")))
       )
   )

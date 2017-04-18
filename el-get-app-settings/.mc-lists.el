@@ -3,11 +3,23 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        backward-delete-if-word
         c-electric-delete-forward
+        c-electric-pound
+        c-electric-slash
+        indent-for-tab-command
+        kill-region
+        org-beginning-of-line
+        org-cycle
+        org-delete-char
+        org-end-of-line
+        org-force-self-insert
         org-self-insert-command
+        org-yank
         yas-expand
         ))
 
 (setq mc/cmds-to-run-once
       '(
+
         ))

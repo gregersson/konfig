@@ -2,7 +2,7 @@
        :website "http://orgmode.org"
        :description "Org-mode is for keeping notes, maintaining ToDo lists, doing project planning, and authoring with a fast and effective plain-text system."
        :type github
-       :url "https://github.com/emacsmirror/org"
+       :pkgname "emacsmirror/org"
        :info "doc"
        :build/berkeley-unix `,(mapcar
                                (lambda (target)
