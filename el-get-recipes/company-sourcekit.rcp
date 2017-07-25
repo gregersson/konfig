@@ -1,0 +1,5 @@
+(:name company-sourcekit
+       :description "Completion support for sourcekit"
+       :type github
+       :pkgname "nathankot/company-sourcekit"
+       )

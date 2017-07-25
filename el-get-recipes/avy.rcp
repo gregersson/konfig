@@ -1,0 +1,5 @@
+(:name avy
+       :description "Ace jump spiritual successor. Jump quickly in files"
+       :type github
+       :pkgname "abo-abo/avy"
+       )

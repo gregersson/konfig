@@ -5,7 +5,9 @@
       '(
         backward-delete-if-word
         c-electric-delete-forward
+        c-electric-paren
         c-electric-pound
+        c-electric-semi&comma
         c-electric-slash
         indent-for-tab-command
         kill-region
@@ -21,5 +23,4 @@
 
 (setq mc/cmds-to-run-once
       '(
-
         ))

@@ -1,4 +1,5 @@
 (:name color-identifiers-mode
+       :description "Change face color based on variable name instead of type"
        :type github
        :url "https://github.com/ankurdave/color-identifiers-mode"
        :depends

@@ -32,15 +32,16 @@
 ;; Required goodies for some kd/kdext-stuffz
 ;;(require 'thingatpt)
 
-;;(require 'package)
-;;(add-to-list 'package-archives
-;;             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 ;; Load el-get packages
 (load-library "setup-el-get.el")
 
 ;; Setup project-root paths and rules
-(load-library "setup-project-root.el")
+;;(load-library "setup-project-root.el")
+
 
 ;; ;; Clone kd-repos if needed
 ;; (if  (file-exists-p (concat konfig-home "kd-repos"))
