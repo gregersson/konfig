@@ -1,4 +1,4 @@
 (:name smart-scan
        :type github
-       :url "https://github.com/mickeynp/smart-scan"
+       :pkgname "mickeynp/smart-scan"
        )

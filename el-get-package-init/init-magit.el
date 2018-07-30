@@ -17,3 +17,4 @@
 (eval-after-load "magit" 
   '(define-key magit-status-mode-map (kbd "W") 'magit-toggle-whitespace))
 
+(setq magit-diff-refine-hunk 'all)

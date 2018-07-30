@@ -1,6 +1,6 @@
 (:name flymake-mode
        :description "Continuous syntax checking for Emacs."
        :type github
-       :url "https://github.com/illusori/emacs-flymake.git"
+       :pkgname "illusori/emacs-flymake"
        )
 

@@ -277,6 +277,12 @@ BEG and END (region to sort)."
 (global-set-key [M-up] 'move-text-up)
 (global-set-key [M-down] 'move-text-down)
 
+(global-set-key [S-right] 'windmove-right)
+(global-set-key [S-left] 'windmove-left)
+(global-set-key [S-up] 'windmove-up)
+(global-set-key [S-down] 'windmove-down)
+(setq windmove-wrap-around t)
+
 (defun init-project-root ()
   (interactive)
   (progn
@@ -409,7 +415,7 @@ With argument, do this that many times."
           desktop-base-lock-name      "emacs.desktop.lock"
           desktop-path                (list desktop-dirname)
           desktop-save                t
-          desktop-files-not-to-save   "^$" ;reload tramp paths
+;;          desktop-files-not-to-save   "^$" ;reload tramp paths
 ;;          desktop-files-not-to-save "*magit" ;ignore magit files
           desktop-load-locked-desktop nil)
     (desktop-save-mode 1)
@@ -533,3 +539,23 @@ With argument, do this that many times."
     ))
 
 (add-hook 'find-file-hook 'my-find-file-check-if-large-file)
+
+
+;; Handle emacs anywhere popup window  
+(defun popup-handler (app-name window-title x y w h)
+  (set-frame-position (selected-frame) x (+ y (- h 400)))
+  (unless (zerop w)
+    (set-frame-size (selected-frame) w 400 t))
+  )
+
+(add-hook 'ea-popup-hook 'popup-handler)
+(defun custom-diff-colors ()
+  "update the colors for diff faces"
+  (set-face-attribute
+   'diff-added nil :foreground "green")
+  (set-face-attribute
+   'diff-removed nil :foreground "red")
+  (set-face-attribute
+   'diff-changed nil :foreground "purple"))
+(eval-after-load "diff-mode" '(custom-diff-colors))
+(setq ediff-diff-options "-w")

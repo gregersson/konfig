@@ -42,79 +42,84 @@
       (append
        ;; Customize which packages you want to install and activate
        '(
-         anything
+	 avy
          ;; anything-complete
          ;; anything-extension
          ;; anything-match-plugin
          ;; ethan-wspace
+         ;; git-gutter-fringe
+         ;; idle-highlight-mode
          ;; slime
-         ;;ws-trim
+         ;; yasnippet
          ;; zencoding-mode
-         company-mode
-         ;;etags-select
-         ;;gdb-mi
-         ;;jedi;; Python auto-completion.
          ;;ace-jump-mode;; Jump quickly to a word or character
-	 avy
-         ack-and-a-half
-         auto-complete;; Auto completion
          ;;autopair
          ;;buffer-move;; Move buffers around
-         color-theme
-         cucumber
          ;;diff-hl
-         ;;discover-js2-refactor
          ;;discover
+         ;;discover-js2-refactor
          ;;eclim
-         el-get
          ;;emacs-w3m
          ;;escreen;;
-         expand-region
-         find-file-in-project
-         flymake
+         ;;etags-select
+         ;;flx-ido
          ;;flymake-cursor
          ;;flymake-json
-         flymake-mode
-         fm
+         ;;fm
          ;;free-keys
-         ;; git-gutter-fringe
+         ;;gdb-mi
          ;;google-maps
          ;;goto-last-change;; Move pointer back to last change
-         graphviz-dot-mode
          ;;guess-offset;; Guesses the tab width from current indentation
          ;;guide-key
-         helm
          ;;highlight-indentation;; Visual indicator for current indentation block
-         ;; idle-highlight-mode
+         ;;ido-vertical-mode
          ;;idomenu
+         ;;jedi;; Python auto-completion.
          ;;js2-mode
          ;;js2-refactor
          ;;jshint-mode
-         json-mode
          ;;lua-mode
-         magit;; Git integration
          ;;monky
-         multiple-cursors
-         nyan-mode;; Nyan cat buffer scrollbar
-         org-mode
          ;;popwin
          ;;project-root
          ;;rainbow-mode
-         undo-tree ;; Better undo/redo handling
+         shell-pop
          ;;smart-compile+;; M-x compile replacement. Determines default compile command from filename.
+         ;;sunrise-commander;; Midnight commander clone
+         ;;tern ;; Javascript magic
+         ;;undo-tree ;; Better undo/redo handling
+         ;;vkill;; Kill processes from emacs
+         ;;whitespace-cleanup-mode
+         ;;ws-trim
+         ;;yasobjc
+         ack-and-a-half
+         anything
+         auto-complete;; Auto completion
+         color-theme
+         company-mode
+         cucumber
+         el-get
+         exec-path-from-shell
+         expand-region
+         find-file-in-project
+         flymake
+         flymake-mode
+         graphviz-dot-mode
+         helm
+         json-mode
+         magit;; Git integration
+         multiple-cursors
+         nyan-mode;; Nyan cat buffer scrollbar
+         org-mode
+         projectile
          smart-forward
          smart-scan
          smex;; M-x pimpifier
-         ;;sunrise-commander;; Midnight commander clone
-         ;;tern ;; Javascript magic
-         ;;vkill;; Kill processes from emacs
-         ws-butler
-         ;; yasnippet
-         ;;yasobjc
          string-edit
-         ;;whitespace-cleanup-mode
-         ;;ido-vertical-mode
-         ;;flx-ido
+         swift-mode
+         undohist
+         ws-butler
          )
        (mapcar 'el-get-source-name el-get-sources))
       )
