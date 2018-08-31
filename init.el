@@ -417,7 +417,7 @@ With argument, do this that many times."
           desktop-save                t
 ;;          desktop-files-not-to-save   "^$" ;reload tramp paths
 ;;          desktop-files-not-to-save "*magit" ;ignore magit files
-          desktop-load-locked-desktop nil)
+          desktop-load-locked-desktop t)
     (desktop-save-mode 1)
     )
   )
@@ -482,13 +482,6 @@ With argument, do this that many times."
     )
   )
 
-(color-theme-initialize)
-(color-theme-rotor)
-(set-face-attribute 'highlight nil :foreground 'unspecified)
-(set-face-attribute 'highlight nil :background 'unspecified)
-(set-face-foreground 'highlight nil)
-(set-face-underline-p 'highlight t)
-(set-face-attribute hl-line-face nil :underline t)
 
 (defun align-regexp-repeated (start stop regexp)
   "Like align-regexp, but repeated for multiple columns. See http://www.emacswiki.org/emacs/AlignCommands"
@@ -559,3 +552,25 @@ With argument, do this that many times."
    'diff-changed nil :foreground "purple"))
 (eval-after-load "diff-mode" '(custom-diff-colors))
 (setq ediff-diff-options "-w")
+
+(server-start)
+
+
+;; theme stuff
+(require 'color-theme)
+(color-theme-initialize)
+
+(color-theme-rotor)
+;; (add-hook 'after-make-frame-functions
+;;            (lambda (frame)
+;;              (set-variable 'color-theme-is-global nil)
+;;              (select-frame frame)
+;;              (if window-system
+;;                  (color-theme-robin-hood)
+;;                (color-theme-tty-dark))))
+
+(set-face-attribute 'highlight nil :foreground 'unspecified)
+(set-face-attribute 'highlight nil :background 'unspecified)
+(set-face-foreground 'highlight nil)
+(set-face-underline-p 'highlight t)
+(set-face-attribute hl-line-face nil :underline t)

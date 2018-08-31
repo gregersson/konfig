@@ -34,8 +34,6 @@
 ;; local sources
 (setq el-get-sources
       '(
-        (:name magit
-               :after (global-set-key (kbd "C-x C-z") 'magit-status))
         ))
 
 (setq my-packages
@@ -119,6 +117,7 @@
          string-edit
          swift-mode
          undohist
+         window-purpose
          ws-butler
          )
        (mapcar 'el-get-source-name el-get-sources))

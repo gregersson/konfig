@@ -1,4 +1,13 @@
-(global-set-key (kbd "C-x C-z") 'magit-status)
+(defun magit-status-dedicated()
+  (interactive)
+  (magit-status)
+  (run-at-time "2 sec" nil 'purpose-mode)
+  (run-at-time "2 sec" nil 'purpose-toggle-window-buffer-dedicated)
+  )
+
+(setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+
+(global-set-key (kbd "C-x C-z") 'magit-status-dedicated)
 (defun magit-toggle-whitespace ()
   (interactive)
   (if (member "-w" magit-diff-options)
