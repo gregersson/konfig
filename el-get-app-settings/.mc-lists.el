@@ -3,6 +3,7 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        backward-delete-char
         backward-delete-if-word
         c-electric-delete-forward
         c-electric-paren

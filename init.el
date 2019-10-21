@@ -1,6 +1,9 @@
 (if (file-exists-p "/Users/greget/konfig")
     (setq konfig-home "/Users/greget/konfig/")
   )
+(if (file-exists-p "/Users/pagr07/konfig")
+    (setq konfig-home "/Users/pagr07/konfig/")
+  )
 (if (file-exists-p "/Users/gregersson/konfig")
     (setq konfig-home "/Users/gregersson/konfig/")
   )
@@ -391,7 +394,7 @@ With argument, do this that many times."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Inconsolata" :foundry "nil" :slant normal :weight normal :height 181 :width normal)))))
-(set-face-attribute 'default nil :height 120)
+(set-face-attribute 'default nil :height 160)
 
 ;; Lisp specific defuns
 

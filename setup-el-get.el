@@ -92,7 +92,7 @@
          ;;ws-trim
          ;;yasobjc
          ack-and-a-half
-         anything
+         ;;anything
          auto-complete;; Auto completion
          color-theme
          company-mode
@@ -101,8 +101,8 @@
          exec-path-from-shell
          expand-region
          find-file-in-project
-         flymake
-         flymake-mode
+         ;;flymake
+         ;;flymake-mode
          graphviz-dot-mode
          helm
          json-mode
@@ -112,7 +112,7 @@
          org-mode
          projectile
          smart-forward
-         smart-scan
+         ;;smart-scan
          smex;; M-x pimpifier
          string-edit
          swift-mode
